@@ -1,0 +1,38 @@
+[
+  {
+    "file": "EMODnet_Anza_Agadir_current_mean_depth.tif",
+    "coverage_id": "emodnet__mean",
+    "wcs_url": "https://ows.emodnet-bathymetry.eu/wcs?service=WCS&version=2.0.1&request=GetCoverage&coverageId=emodnet__mean&subset=Long%28-9.71%2C-9.64%29&subset=Lat%2830.41%2C30.49%29&format=image%2Ftiff",
+    "retrieved_utc": "2026-11-07T13:48:30.337370+00:00",
+    "sha256": "3c488d110c047ca4292268e3949a4f54f30b16e749bc99d8bfb2c1a9649752f2",
+    "bytes": 41360,
+    "license_note": "EMODnet Bathymetry terms and attribution to be confirmed from cited product page before redistribution."
+  },
+  {
+    "file": "EMODnet_Anza_Agadir_release_2022_mean_depth.tif",
+    "coverage_id": "emodnet__mean_2022",
+    "wcs_url": "https://ows.emodnet-bathymetry.eu/wcs?service=WCS&version=2.0.1&request=GetCoverage&coverageId=emodnet__mean_2022&subset=Long%28-9.71%2C-9.64%29&subset=Lat%2830.41%2C30.49%29&format=image%2Ftiff",
+    "retrieved_utc": "2026-11-07T13:48:30.530746+00:00",
+    "sha256": "5cd654f39bba6a880dc8c8d50502458e87178fa14aee3f8baac0d7b508dc2d82",
+    "bytes": 41360,
+    "license_note": "EMODnet Bathymetry terms and attribution to be confirmed from cited product page before redistribution."
+  },
+  {
+    "file": "EMODnet_Ras_El_Ma_current_mean_depth.tif",
+    "coverage_id": "emodnet__mean",
+    "wcs_url": "https://ows.emodnet-bathymetry.eu/wcs?service=WCS&version=2.0.1&request=GetCoverage&coverageId=emodnet__mean&subset=Long%28-2.47%2C-2.35%29&subset=Lat%2835.1%2C35.19%29&format=image%2Ftiff",
+    "retrieved_utc": "2026-11-07T13:48:30.765947+00:00",
+    "sha256": "812ba7c0f92a3522d029e2cca62a17f6af96e01fff9f2306c8d7ca6368158f80",
+    "bytes": 143776,
+    "license_note": "EMODnet Bathymetry terms and attribution to be confirmed from cited product page before redistribution."
+  },
+  {
+    "file": "EMODnet_Ras_El_Ma_release_2022_mean_depth.tif",
+    "coverage_id": "emodnet__mean_2022",
+    "wcs_url": "https://ows.emodnet-bathymetry.eu/wcs?service=WCS&version=2.0.1&request=GetCoverage&coverageId=emodnet__mean_2022&subset=Long%28-2.47%2C-2.35%29&subset=Lat%2835.1%2C35.19%29&format=image%2Ftiff",
+    "retrieved_utc": "2026-11-07T13:48:30.913076+00:00",
+    "sha256": "b03bbe54cbd7f5e37be9bbc38e3cbd7a76ab4d32c7dec8a7d8cb27d6e4e631af",
+    "bytes": 143776,
+    "license_note": "EMODnet Bathymetry terms and attribution to be confirmed from cited product page before redistribution."
+  }
+]

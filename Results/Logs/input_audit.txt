@@ -1,0 +1,14 @@
+Two-coast SDB input audit
+============================
+Survey points | Anza_Agadir | FOUND | Data\Survey\Anza_Agadir\Anza_Agadir_bathy_points.txt
+Survey points | Ras_El_Ma_Ras_Kebdana | FOUND | Data\Survey\Ras_El_Ma_Ras_Kebdana\ras_bathy_points.csv
+HLS acquisitions | 53/53 complete local chips
+GOT5 tide-model NetCDF files | 28 found
+EMODnet/GEBCO context rasters | 8 found
+ICESat-2 ATL24 external-check granules | 0 found
+Local port/ANP tide-gauge observations | not included in the copied data
+The pipeline uses modeled relative anomalies without claiming locally observed or absolute port-zero water levels.
+Optional input not downloaded: ATL24 granules near the survey dates. Search/download command:
+  .\.venv\Scripts\python.exe .\Scripts\00_download_atl24.py
+ATL24 is optional. Check track overlap, quality flags, time, and vertical reference before using it as an independent comparison.
+Required copied inputs are present. HLS download command can be rerun to fill missing chips.

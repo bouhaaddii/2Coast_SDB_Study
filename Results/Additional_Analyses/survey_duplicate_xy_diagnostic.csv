@@ -1,0 +1,3 @@
+site,survey_points_n,exact_duplicate_xyz_rows_removed,unique_xyz_points_n,repeated_exact_xy_groups_n,points_in_repeated_exact_xy_groups_n,median_within_group_z_range_m,p95_within_group_z_range_m,max_within_group_z_range_m,interpretation
+Anza_Agadir,24508,0,24508,0,0,,,,exact-coordinate consistency diagnostic only; not a repeatability uncertainty unless independent repeat observations are verified from survey provenance
+Ras_El_Ma_Ras_Kebdana,383259,10595,372664,1,2,0.030000,0.030000,0.030000,exact-coordinate consistency diagnostic only; not a repeatability uncertainty unless independent repeat observations are verified from survey provenance

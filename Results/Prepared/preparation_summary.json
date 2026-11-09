@@ -1,0 +1,41 @@
+{
+  "pixel_samples": 8497,
+  "sites": {
+    "Anza_Agadir": {
+      "pixel_count": 2660,
+      "sounding_count": 23178,
+      "depth_min_m": 0.01,
+      "depth_max_m": 22.44,
+      "local_vertical_reference": "Hydrographic zero of the Port of Agadir, Morocco",
+      "raw_valid_xyz_records": 24508,
+      "exact_xyz_duplicates_removed": 0,
+      "unique_xyz_records_after_deduplication": 24508,
+      "submerged_unique_soundings_inside_hls_chip": 23178
+    },
+    "Ras_El_Ma_Ras_Kebdana": {
+      "pixel_count": 5837,
+      "sounding_count": 372654,
+      "depth_min_m": 0.1,
+      "depth_max_m": 14.835,
+      "local_vertical_reference": "Hydrographic zero of the Port of Ras Kebdana",
+      "raw_valid_xyz_records": 383259,
+      "exact_xyz_duplicates_removed": 10595,
+      "unique_xyz_records_after_deduplication": 372664,
+      "submerged_unique_soundings_inside_hls_chip": 372654
+    }
+  },
+  "scene_count": 53,
+  "fmask_bad_bits": {
+    "cloud": 1,
+    "adjacent_cloud_shadow": 2,
+    "cloud_shadow": 3,
+    "snow_ice": 4,
+    "water_flag": 5,
+    "aerosol": "6-7"
+  },
+  "reflectance_scale_factor": 0.0001,
+  "training_depth_rule": "depth_m = -z_source; z_source <= 0 only",
+  "pixel_aggregation": "median depth per HLS 30 m grid cell before validation",
+  "survey_point_cleaning": "Exact duplicate XYZ records are removed before submerged-point filtering and pixel aggregation; same-XY points with different Z are retained.",
+  "scene_quality_definition": "Fraction of pixels in the fixed union of Fmask water pixels across candidate acquisitions that have valid four-band reflectance and no cloud, adjacent-cloud/shadow, cloud-shadow, or snow/ice flags. Computed over the image chip, independently of survey sample locations and depth labels."
+}

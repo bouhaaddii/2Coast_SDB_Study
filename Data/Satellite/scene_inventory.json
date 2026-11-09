@@ -1,0 +1,1917 @@
+{
+  "source": "NASA/USGS HLS v2.0",
+  "downloaded_utc": "2026-11-08T11:44:27.826487+00:00",
+  "temporal_window_days": 30,
+  "roi_buffer_m": 1200,
+  "items": [
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022284T112109.v2.0",
+      "datetime_utc": "2022-10-11T11:32:55.640920Z",
+      "cloud_cover_tile_percent": 50.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-11\\HLS.S30.T29RMP.2022284T112109.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-11\\HLS.S30.T29RMP.2022284T112109.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-11\\HLS.S30.T29RMP.2022284T112109.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-11\\HLS.S30.T29RMP.2022284T112109.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-11\\HLS.S30.T29RMP.2022284T112109.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022286T111011.v2.0",
+      "datetime_utc": "2022-10-13T11:23:06.416600Z",
+      "cloud_cover_tile_percent": 3.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-13\\HLS.S30.T29RMP.2022286T111011.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-13\\HLS.S30.T29RMP.2022286T111011.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-13\\HLS.S30.T29RMP.2022286T111011.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-13\\HLS.S30.T29RMP.2022286T111011.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-13\\HLS.S30.T29RMP.2022286T111011.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022289T112121.v2.0",
+      "datetime_utc": "2022-10-16T11:33:00.678360Z",
+      "cloud_cover_tile_percent": 80.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-16\\HLS.S30.T29RMP.2022289T112121.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-16\\HLS.S30.T29RMP.2022289T112121.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-16\\HLS.S30.T29RMP.2022289T112121.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-16\\HLS.S30.T29RMP.2022289T112121.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-16\\HLS.S30.T29RMP.2022289T112121.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022291T110949.v2.0",
+      "datetime_utc": "2022-10-18T11:23:00.962280Z",
+      "cloud_cover_tile_percent": 22.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-18\\HLS.S30.T29RMP.2022291T110949.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-18\\HLS.S30.T29RMP.2022291T110949.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-18\\HLS.S30.T29RMP.2022291T110949.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-18\\HLS.S30.T29RMP.2022291T110949.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-18\\HLS.S30.T29RMP.2022291T110949.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022294T112119.v2.0",
+      "datetime_utc": "2022-10-21T11:32:56.545890Z",
+      "cloud_cover_tile_percent": 2.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-21\\HLS.S30.T29RMP.2022294T112119.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-21\\HLS.S30.T29RMP.2022294T112119.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-21\\HLS.S30.T29RMP.2022294T112119.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-21\\HLS.S30.T29RMP.2022294T112119.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-21\\HLS.S30.T29RMP.2022294T112119.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022296T111121.v2.0",
+      "datetime_utc": "2022-10-23T11:23:03.872310Z",
+      "cloud_cover_tile_percent": 20.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-23\\HLS.S30.T29RMP.2022296T111121.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-23\\HLS.S30.T29RMP.2022296T111121.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-23\\HLS.S30.T29RMP.2022296T111121.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-23\\HLS.S30.T29RMP.2022296T111121.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-23\\HLS.S30.T29RMP.2022296T111121.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022299T112151.v2.0",
+      "datetime_utc": "2022-10-26T11:33:00.169930Z",
+      "cloud_cover_tile_percent": 1.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-26\\HLS.S30.T29RMP.2022299T112151.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-26\\HLS.S30.T29RMP.2022299T112151.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-26\\HLS.S30.T29RMP.2022299T112151.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-26\\HLS.S30.T29RMP.2022299T112151.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-26\\HLS.S30.T29RMP.2022299T112151.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022301T111059.v2.0",
+      "datetime_utc": "2022-10-28T11:23:00.510720Z",
+      "cloud_cover_tile_percent": 6.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-28\\HLS.S30.T29RMP.2022301T111059.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-28\\HLS.S30.T29RMP.2022301T111059.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-28\\HLS.S30.T29RMP.2022301T111059.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-28\\HLS.S30.T29RMP.2022301T111059.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-28\\HLS.S30.T29RMP.2022301T111059.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022304T112119.v2.0",
+      "datetime_utc": "2022-10-31T11:32:55.487630Z",
+      "cloud_cover_tile_percent": 2.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-31\\HLS.S30.T29RMP.2022304T112119.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-31\\HLS.S30.T29RMP.2022304T112119.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-31\\HLS.S30.T29RMP.2022304T112119.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-31\\HLS.S30.T29RMP.2022304T112119.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-31\\HLS.S30.T29RMP.2022304T112119.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022306T111221.v2.0",
+      "datetime_utc": "2022-11-02T11:23:05.656910Z",
+      "cloud_cover_tile_percent": 60.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-02\\HLS.S30.T29RMP.2022306T111221.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-02\\HLS.S30.T29RMP.2022306T111221.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-02\\HLS.S30.T29RMP.2022306T111221.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-02\\HLS.S30.T29RMP.2022306T111221.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-02\\HLS.S30.T29RMP.2022306T111221.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022309T112241.v2.0",
+      "datetime_utc": "2022-11-05T11:33:01.228480Z",
+      "cloud_cover_tile_percent": 10.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-05\\HLS.S30.T29RMP.2022309T112241.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-05\\HLS.S30.T29RMP.2022309T112241.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-05\\HLS.S30.T29RMP.2022309T112241.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-05\\HLS.S30.T29RMP.2022309T112241.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-05\\HLS.S30.T29RMP.2022309T112241.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022311T111149.v2.0",
+      "datetime_utc": "2022-11-07T11:23:00.207010Z",
+      "cloud_cover_tile_percent": 6.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-07\\HLS.S30.T29RMP.2022311T111149.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-07\\HLS.S30.T29RMP.2022311T111149.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-07\\HLS.S30.T29RMP.2022311T111149.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-07\\HLS.S30.T29RMP.2022311T111149.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-07\\HLS.S30.T29RMP.2022311T111149.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022314T112209.v2.0",
+      "datetime_utc": "2022-11-10T11:32:47.405000Z",
+      "cloud_cover_tile_percent": 2.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-10\\HLS.S30.T29RMP.2022314T112209.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-10\\HLS.S30.T29RMP.2022314T112209.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-10\\HLS.S30.T29RMP.2022314T112209.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-10\\HLS.S30.T29RMP.2022314T112209.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-10\\HLS.S30.T29RMP.2022314T112209.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022316T111321.v2.0",
+      "datetime_utc": "2022-11-12T11:23:04.804300Z",
+      "cloud_cover_tile_percent": 17.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-12\\HLS.S30.T29RMP.2022316T111321.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-12\\HLS.S30.T29RMP.2022316T111321.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-12\\HLS.S30.T29RMP.2022316T111321.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-12\\HLS.S30.T29RMP.2022316T111321.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-12\\HLS.S30.T29RMP.2022316T111321.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022319T112331.v2.0",
+      "datetime_utc": "2022-11-15T11:32:59.545380Z",
+      "cloud_cover_tile_percent": 4.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-15\\HLS.S30.T29RMP.2022319T112331.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-15\\HLS.S30.T29RMP.2022319T112331.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-15\\HLS.S30.T29RMP.2022319T112331.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-15\\HLS.S30.T29RMP.2022319T112331.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-15\\HLS.S30.T29RMP.2022319T112331.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022321T111239.v2.0",
+      "datetime_utc": "2022-11-17T11:23:01.324980Z",
+      "cloud_cover_tile_percent": 4.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-17\\HLS.S30.T29RMP.2022321T111239.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-17\\HLS.S30.T29RMP.2022321T111239.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-17\\HLS.S30.T29RMP.2022321T111239.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-17\\HLS.S30.T29RMP.2022321T111239.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-17\\HLS.S30.T29RMP.2022321T111239.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022324T112259.v2.0",
+      "datetime_utc": "2022-11-20T11:32:56.814320Z",
+      "cloud_cover_tile_percent": 2.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-20\\HLS.S30.T29RMP.2022324T112259.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-20\\HLS.S30.T29RMP.2022324T112259.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-20\\HLS.S30.T29RMP.2022324T112259.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-20\\HLS.S30.T29RMP.2022324T112259.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-20\\HLS.S30.T29RMP.2022324T112259.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022326T111401.v2.0",
+      "datetime_utc": "2022-11-22T11:23:01.624440Z",
+      "cloud_cover_tile_percent": 4.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-22\\HLS.S30.T29RMP.2022326T111401.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-22\\HLS.S30.T29RMP.2022326T111401.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-22\\HLS.S30.T29RMP.2022326T111401.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-22\\HLS.S30.T29RMP.2022326T111401.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-22\\HLS.S30.T29RMP.2022326T111401.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022329T112411.v2.0",
+      "datetime_utc": "2022-11-25T11:32:56.362300Z",
+      "cloud_cover_tile_percent": 1.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-25\\HLS.S30.T29RMP.2022329T112411.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-25\\HLS.S30.T29RMP.2022329T112411.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-25\\HLS.S30.T29RMP.2022329T112411.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-25\\HLS.S30.T29RMP.2022329T112411.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-25\\HLS.S30.T29RMP.2022329T112411.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022331T111319.v2.0",
+      "datetime_utc": "2022-11-27T11:23:00.618560Z",
+      "cloud_cover_tile_percent": 4.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-27\\HLS.S30.T29RMP.2022331T111319.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-27\\HLS.S30.T29RMP.2022331T111319.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-27\\HLS.S30.T29RMP.2022331T111319.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-27\\HLS.S30.T29RMP.2022331T111319.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-27\\HLS.S30.T29RMP.2022331T111319.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022334T112329.v2.0",
+      "datetime_utc": "2022-11-30T11:32:55.580900Z",
+      "cloud_cover_tile_percent": 27.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-30\\HLS.S30.T29RMP.2022334T112329.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-30\\HLS.S30.T29RMP.2022334T112329.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-30\\HLS.S30.T29RMP.2022334T112329.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-30\\HLS.S30.T29RMP.2022334T112329.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-30\\HLS.S30.T29RMP.2022334T112329.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022336T111431.v2.0",
+      "datetime_utc": "2022-12-02T11:23:01.890010Z",
+      "cloud_cover_tile_percent": 73.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-02\\HLS.S30.T29RMP.2022336T111431.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-02\\HLS.S30.T29RMP.2022336T111431.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-02\\HLS.S30.T29RMP.2022336T111431.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-02\\HLS.S30.T29RMP.2022336T111431.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-02\\HLS.S30.T29RMP.2022336T111431.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022339T112441.v2.0",
+      "datetime_utc": "2022-12-05T11:32:57.611010Z",
+      "cloud_cover_tile_percent": 97.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-05\\HLS.S30.T29RMP.2022339T112441.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-05\\HLS.S30.T29RMP.2022339T112441.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-05\\HLS.S30.T29RMP.2022339T112441.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-05\\HLS.S30.T29RMP.2022339T112441.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-05\\HLS.S30.T29RMP.2022339T112441.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022341T111339.v2.0",
+      "datetime_utc": "2022-12-07T11:22:58.144610Z",
+      "cloud_cover_tile_percent": 40.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-07\\HLS.S30.T29RMP.2022341T111339.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-07\\HLS.S30.T29RMP.2022341T111339.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-07\\HLS.S30.T29RMP.2022341T111339.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-07\\HLS.S30.T29RMP.2022341T111339.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-07\\HLS.S30.T29RMP.2022341T111339.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T29RMP.2022344T112349.v2.0",
+      "datetime_utc": "2022-12-10T11:32:53.831150Z",
+      "cloud_cover_tile_percent": 75.0,
+      "tile": "T29RMP",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-10\\HLS.S30.T29RMP.2022344T112349.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-10\\HLS.S30.T29RMP.2022344T112349.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-10\\HLS.S30.T29RMP.2022344T112349.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-10\\HLS.S30.T29RMP.2022344T112349.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-10\\HLS.S30.T29RMP.2022344T112349.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T29RMP.2022285T111114.v2.0",
+      "datetime_utc": "2022-10-12T11:11:14.181108Z",
+      "cloud_cover_tile_percent": 18.0,
+      "tile": "T29RMP",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-12\\HLS.L30.T29RMP.2022285T111114.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-12\\HLS.L30.T29RMP.2022285T111114.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-12\\HLS.L30.T29RMP.2022285T111114.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-12\\HLS.L30.T29RMP.2022285T111114.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-12\\HLS.L30.T29RMP.2022285T111114.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T29RMP.2022293T111110.v2.0",
+      "datetime_utc": "2022-10-20T11:11:10.993754Z",
+      "cloud_cover_tile_percent": 6.0,
+      "tile": "T29RMP",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-20\\HLS.L30.T29RMP.2022293T111110.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-20\\HLS.L30.T29RMP.2022293T111110.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-20\\HLS.L30.T29RMP.2022293T111110.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-20\\HLS.L30.T29RMP.2022293T111110.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-20\\HLS.L30.T29RMP.2022293T111110.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T29RMP.2022301T111121.v2.0",
+      "datetime_utc": "2022-10-28T11:11:21.790270Z",
+      "cloud_cover_tile_percent": 4.0,
+      "tile": "T29RMP",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-28\\HLS.L30.T29RMP.2022301T111121.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-28\\HLS.L30.T29RMP.2022301T111121.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-28\\HLS.L30.T29RMP.2022301T111121.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-28\\HLS.L30.T29RMP.2022301T111121.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-10-28\\HLS.L30.T29RMP.2022301T111121.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T29RMP.2022309T111108.v2.0",
+      "datetime_utc": "2022-11-05T11:11:08.775425Z",
+      "cloud_cover_tile_percent": 9.0,
+      "tile": "T29RMP",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-05\\HLS.L30.T29RMP.2022309T111108.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-05\\HLS.L30.T29RMP.2022309T111108.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-05\\HLS.L30.T29RMP.2022309T111108.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-05\\HLS.L30.T29RMP.2022309T111108.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-05\\HLS.L30.T29RMP.2022309T111108.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T29RMP.2022317T111117.v2.0",
+      "datetime_utc": "2022-11-13T11:11:17.950330Z",
+      "cloud_cover_tile_percent": 19.0,
+      "tile": "T29RMP",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-13\\HLS.L30.T29RMP.2022317T111117.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-13\\HLS.L30.T29RMP.2022317T111117.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-13\\HLS.L30.T29RMP.2022317T111117.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-13\\HLS.L30.T29RMP.2022317T111117.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-13\\HLS.L30.T29RMP.2022317T111117.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T29RMP.2022325T111111.v2.0",
+      "datetime_utc": "2022-11-21T11:11:11.677966Z",
+      "cloud_cover_tile_percent": 1.0,
+      "tile": "T29RMP",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-21\\HLS.L30.T29RMP.2022325T111111.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-21\\HLS.L30.T29RMP.2022325T111111.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-21\\HLS.L30.T29RMP.2022325T111111.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-21\\HLS.L30.T29RMP.2022325T111111.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-21\\HLS.L30.T29RMP.2022325T111111.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T29RMP.2022333T111117.v2.0",
+      "datetime_utc": "2022-11-29T11:11:17.485678Z",
+      "cloud_cover_tile_percent": 2.0,
+      "tile": "T29RMP",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-29\\HLS.L30.T29RMP.2022333T111117.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-29\\HLS.L30.T29RMP.2022333T111117.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-29\\HLS.L30.T29RMP.2022333T111117.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-29\\HLS.L30.T29RMP.2022333T111117.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-11-29\\HLS.L30.T29RMP.2022333T111117.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Anza_Agadir",
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T29RMP.2022341T111110.v2.0",
+      "datetime_utc": "2022-12-07T11:11:10.216630Z",
+      "cloud_cover_tile_percent": 51.0,
+      "tile": "T29RMP",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-07\\HLS.L30.T29RMP.2022341T111110.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-07\\HLS.L30.T29RMP.2022341T111110.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-07\\HLS.L30.T29RMP.2022341T111110.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-07\\HLS.L30.T29RMP.2022341T111110.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Anza_Agadir\\2022-12-07\\HLS.L30.T29RMP.2022341T111110.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T30SWD.2024195T104619.v2.0",
+      "datetime_utc": "2024-07-13T11:01:36.590490Z",
+      "cloud_cover_tile_percent": 1.0,
+      "tile": "T30SWD",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-13\\HLS.S30.T30SWD.2024195T104619.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-13\\HLS.S30.T30SWD.2024195T104619.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-13\\HLS.S30.T30SWD.2024195T104619.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-13\\HLS.S30.T30SWD.2024195T104619.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-13\\HLS.S30.T30SWD.2024195T104619.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T30SWD.2024200T105031.v2.0",
+      "datetime_utc": "2024-07-18T11:01:34.687800Z",
+      "cloud_cover_tile_percent": 30.0,
+      "tile": "T30SWD",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-18\\HLS.S30.T30SWD.2024200T105031.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-18\\HLS.S30.T30SWD.2024200T105031.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-18\\HLS.S30.T30SWD.2024200T105031.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-18\\HLS.S30.T30SWD.2024200T105031.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-18\\HLS.S30.T30SWD.2024200T105031.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T30SWD.2024205T104619.v2.0",
+      "datetime_utc": "2024-07-23T11:01:37.470510Z",
+      "cloud_cover_tile_percent": 0.0,
+      "tile": "T30SWD",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-23\\HLS.S30.T30SWD.2024205T104619.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-23\\HLS.S30.T30SWD.2024205T104619.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-23\\HLS.S30.T30SWD.2024205T104619.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-23\\HLS.S30.T30SWD.2024205T104619.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-23\\HLS.S30.T30SWD.2024205T104619.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T30SWD.2024210T105031.v2.0",
+      "datetime_utc": "2024-07-28T11:01:36.869990Z",
+      "cloud_cover_tile_percent": 43.0,
+      "tile": "T30SWD",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-28\\HLS.S30.T30SWD.2024210T105031.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-28\\HLS.S30.T30SWD.2024210T105031.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-28\\HLS.S30.T30SWD.2024210T105031.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-28\\HLS.S30.T30SWD.2024210T105031.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-28\\HLS.S30.T30SWD.2024210T105031.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T30SWD.2024215T104619.v2.0",
+      "datetime_utc": "2024-08-02T11:01:34.972310Z",
+      "cloud_cover_tile_percent": 29.0,
+      "tile": "T30SWD",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-02\\HLS.S30.T30SWD.2024215T104619.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-02\\HLS.S30.T30SWD.2024215T104619.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-02\\HLS.S30.T30SWD.2024215T104619.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-02\\HLS.S30.T30SWD.2024215T104619.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-02\\HLS.S30.T30SWD.2024215T104619.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T30SWD.2024220T105031.v2.0",
+      "datetime_utc": "2024-08-07T11:01:35.417300Z",
+      "cloud_cover_tile_percent": 3.0,
+      "tile": "T30SWD",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-07\\HLS.S30.T30SWD.2024220T105031.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-07\\HLS.S30.T30SWD.2024220T105031.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-07\\HLS.S30.T30SWD.2024220T105031.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-07\\HLS.S30.T30SWD.2024220T105031.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-07\\HLS.S30.T30SWD.2024220T105031.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T30SWD.2024225T104629.v2.0",
+      "datetime_utc": "2024-08-12T11:01:38.568700Z",
+      "cloud_cover_tile_percent": 0.0,
+      "tile": "T30SWD",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-12\\HLS.S30.T30SWD.2024225T104629.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-12\\HLS.S30.T30SWD.2024225T104629.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-12\\HLS.S30.T30SWD.2024225T104629.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-12\\HLS.S30.T30SWD.2024225T104629.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-12\\HLS.S30.T30SWD.2024225T104629.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T30SWD.2024230T105031.v2.0",
+      "datetime_utc": "2024-08-17T11:01:34.597830Z",
+      "cloud_cover_tile_percent": 0.0,
+      "tile": "T30SWD",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-17\\HLS.S30.T30SWD.2024230T105031.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-17\\HLS.S30.T30SWD.2024230T105031.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-17\\HLS.S30.T30SWD.2024230T105031.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-17\\HLS.S30.T30SWD.2024230T105031.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-17\\HLS.S30.T30SWD.2024230T105031.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T30SWD.2024235T104619.v2.0",
+      "datetime_utc": "2024-08-22T11:01:33.490420Z",
+      "cloud_cover_tile_percent": 1.0,
+      "tile": "T30SWD",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-22\\HLS.S30.T30SWD.2024235T104619.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-22\\HLS.S30.T30SWD.2024235T104619.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-22\\HLS.S30.T30SWD.2024235T104619.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-22\\HLS.S30.T30SWD.2024235T104619.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-22\\HLS.S30.T30SWD.2024235T104619.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T30SWD.2024240T105021.v2.0",
+      "datetime_utc": "2024-08-27T11:01:32.424620Z",
+      "cloud_cover_tile_percent": 14.0,
+      "tile": "T30SWD",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-27\\HLS.S30.T30SWD.2024240T105021.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-27\\HLS.S30.T30SWD.2024240T105021.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-27\\HLS.S30.T30SWD.2024240T105021.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-27\\HLS.S30.T30SWD.2024240T105021.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-27\\HLS.S30.T30SWD.2024240T105021.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T30SWD.2024245T104619.v2.0",
+      "datetime_utc": "2024-09-01T11:01:37.081170Z",
+      "cloud_cover_tile_percent": 48.0,
+      "tile": "T30SWD",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-01\\HLS.S30.T30SWD.2024245T104619.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-01\\HLS.S30.T30SWD.2024245T104619.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-01\\HLS.S30.T30SWD.2024245T104619.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-01\\HLS.S30.T30SWD.2024245T104619.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-01\\HLS.S30.T30SWD.2024245T104619.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "S30",
+      "item_id": "HLS.S30.T30SWD.2024250T104621.v2.0",
+      "datetime_utc": "2024-09-06T11:01:34.258260Z",
+      "cloud_cover_tile_percent": 3.0,
+      "tile": "T30SWD",
+      "collection": "hls2-s30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSS30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-06\\HLS.S30.T30SWD.2024250T104621.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-06\\HLS.S30.T30SWD.2024250T104621.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-06\\HLS.S30.T30SWD.2024250T104621.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-06\\HLS.S30.T30SWD.2024250T104621.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-06\\HLS.S30.T30SWD.2024250T104621.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T30SWD.2024191T104410.v2.0",
+      "datetime_utc": "2024-07-09T10:44:10.514056Z",
+      "cloud_cover_tile_percent": 1.0,
+      "tile": "T30SWD",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-09\\HLS.L30.T30SWD.2024191T104410.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-09\\HLS.L30.T30SWD.2024191T104410.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-09\\HLS.L30.T30SWD.2024191T104410.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-09\\HLS.L30.T30SWD.2024191T104410.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-09\\HLS.L30.T30SWD.2024191T104410.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T30SWD.2024199T104420.v2.0",
+      "datetime_utc": "2024-07-17T10:44:20.445052Z",
+      "cloud_cover_tile_percent": 4.0,
+      "tile": "T30SWD",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-17\\HLS.L30.T30SWD.2024199T104420.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-17\\HLS.L30.T30SWD.2024199T104420.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-17\\HLS.L30.T30SWD.2024199T104420.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-17\\HLS.L30.T30SWD.2024199T104420.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-17\\HLS.L30.T30SWD.2024199T104420.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T30SWD.2024207T104413.v2.0",
+      "datetime_utc": "2024-07-25T10:44:13.396551Z",
+      "cloud_cover_tile_percent": 24.0,
+      "tile": "T30SWD",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-25\\HLS.L30.T30SWD.2024207T104413.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-25\\HLS.L30.T30SWD.2024207T104413.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-25\\HLS.L30.T30SWD.2024207T104413.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-25\\HLS.L30.T30SWD.2024207T104413.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-07-25\\HLS.L30.T30SWD.2024207T104413.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T30SWD.2024215T104424.v2.0",
+      "datetime_utc": "2024-08-02T10:44:24.823536Z",
+      "cloud_cover_tile_percent": 30.0,
+      "tile": "T30SWD",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-02\\HLS.L30.T30SWD.2024215T104424.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-02\\HLS.L30.T30SWD.2024215T104424.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-02\\HLS.L30.T30SWD.2024215T104424.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-02\\HLS.L30.T30SWD.2024215T104424.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-02\\HLS.L30.T30SWD.2024215T104424.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T30SWD.2024223T104422.v2.0",
+      "datetime_utc": "2024-08-10T10:44:22.175908Z",
+      "cloud_cover_tile_percent": 5.0,
+      "tile": "T30SWD",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-10\\HLS.L30.T30SWD.2024223T104422.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-10\\HLS.L30.T30SWD.2024223T104422.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-10\\HLS.L30.T30SWD.2024223T104422.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-10\\HLS.L30.T30SWD.2024223T104422.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-10\\HLS.L30.T30SWD.2024223T104422.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T30SWD.2024231T104432.v2.0",
+      "datetime_utc": "2024-08-18T10:44:32.392447Z",
+      "cloud_cover_tile_percent": 0.0,
+      "tile": "T30SWD",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-18\\HLS.L30.T30SWD.2024231T104432.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-18\\HLS.L30.T30SWD.2024231T104432.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-18\\HLS.L30.T30SWD.2024231T104432.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-18\\HLS.L30.T30SWD.2024231T104432.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-18\\HLS.L30.T30SWD.2024231T104432.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T30SWD.2024239T104435.v2.0",
+      "datetime_utc": "2024-08-26T10:44:35.259604Z",
+      "cloud_cover_tile_percent": 30.0,
+      "tile": "T30SWD",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-26\\HLS.L30.T30SWD.2024239T104435.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-26\\HLS.L30.T30SWD.2024239T104435.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-26\\HLS.L30.T30SWD.2024239T104435.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-26\\HLS.L30.T30SWD.2024239T104435.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-08-26\\HLS.L30.T30SWD.2024239T104435.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "product": "L30",
+      "item_id": "HLS.L30.T30SWD.2024247T104440.v2.0",
+      "datetime_utc": "2024-09-03T10:44:40.914845Z",
+      "cloud_cover_tile_percent": 0.0,
+      "tile": "T30SWD",
+      "collection": "hls2-l30",
+      "source": "NASA/USGS HLS v2.0 via Microsoft Planetary Computer",
+      "data_doi": "10.5067/HLS/HLSL30.002",
+      "roi_buffer_m": 1200,
+      "assets": {
+        "blue": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-03\\HLS.L30.T30SWD.2024247T104440.v2.0\\blue.tif",
+          "status": "already_present"
+        },
+        "green": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-03\\HLS.L30.T30SWD.2024247T104440.v2.0\\green.tif",
+          "status": "already_present"
+        },
+        "red": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-03\\HLS.L30.T30SWD.2024247T104440.v2.0\\red.tif",
+          "status": "already_present"
+        },
+        "nir": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-03\\HLS.L30.T30SWD.2024247T104440.v2.0\\nir.tif",
+          "status": "already_present"
+        },
+        "qa": {
+          "file": "Data\\Satellite\\Ras_El_Ma_Ras_Kebdana\\2024-09-03\\HLS.L30.T30SWD.2024247T104440.v2.0\\qa.tif",
+          "status": "already_present"
+        }
+      },
+      "status": "complete"
+    }
+  ],
+  "failures": []
+}

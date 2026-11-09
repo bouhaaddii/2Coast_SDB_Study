@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.py[cod]
+
+# Unused tide-model test data
+Data/Tide_Model/GOT5.5/
+Data/Tide_Model/GOT5.5_testdata.zip
+
+# Intermediate checkpoint and local rendered review packages
+Results/Logs/stage2_checkpoint.jsonl
+Results/QA_Interpretations/
+Documentation/
+TwoCoast_SDB_Writing_Package_*.zip

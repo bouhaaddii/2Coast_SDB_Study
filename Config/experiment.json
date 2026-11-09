@@ -1,0 +1,117 @@
+{
+  "project_title": "Evaluating tide-aware, multi-temporal satellite-derived bathymetry across two Moroccan coasts",
+  "target_journal": "Remote Sensing of Environment",
+  "primary_temporal_window_days": 30,
+  "sensitivity_temporal_window_days": 14,
+  "roi_buffer_m": 1200,
+  "random_seed": 20261107,
+  "sites": {
+    "Anza_Agadir": {
+      "display_name": "Anza / Agadir, Atlantic coast",
+      "survey_date": "2022-11-10",
+      "survey_collection_window_local": {
+        "start": "10:33",
+        "end": "15:16",
+        "timezone": "Africa/Casablanca",
+        "source": "User-reported field collection interval; individual sounding timestamps unavailable."
+      },
+      "survey_crs": "EPSG:26192",
+      "image_crs": "EPSG:32629",
+      "hls_tile": "T29RMP",
+      "query_bbox_wgs84": [
+        -9.72,
+        30.4,
+        -9.62,
+        30.5
+      ],
+      "survey_points": "Data/Survey/Anza_Agadir/Anza_Agadir_bathy_points.txt",
+      "vertical_reference": "Hydrographic zero of the Port of Agadir, Morocco",
+      "vertical_reference_note": "Local site datum. No transformation to the Ras El Ma/Ras Kebdana local zero is defined. The plan-title-block Delta-Z translation is not a hydrographic datum tie.",
+      "nearest_date_s30_reference": "HLS.S30.T29RMP.2022314T112209.v2.0",
+      "chart_zero_relative_to_NGM_m": -2.159,
+      "chart_zero_source": "Morocco National Report to EAtHC18 (2024), official hydrographic report; local zero relation to NGM."
+    },
+    "Ras_El_Ma_Ras_Kebdana": {
+      "display_name": "Ras El Ma / Ras Kebdana, Mediterranean coast",
+      "survey_date": "2024-08-08",
+      "survey_collection_window_local": {
+        "start": "10:13",
+        "end": "16:02",
+        "timezone": "Africa/Casablanca",
+        "source": "User-reported field collection interval; individual sounding timestamps unavailable."
+      },
+      "survey_crs": "EPSG:26191",
+      "image_crs": "EPSG:32630",
+      "hls_tile": "T30SWD",
+      "query_bbox_wgs84": [
+        -2.48,
+        35.09,
+        -2.34,
+        35.2
+      ],
+      "survey_points": "Data/Survey/Ras_El_Ma_Ras_Kebdana/ras_bathy_points.csv",
+      "vertical_reference": "Hydrographic zero of the Port of Ras Kebdana",
+      "vertical_reference_note": "Local site datum. No transformation to the Anza/Agadir local zero is defined. The plan-title-block Delta-Z translation is not a hydrographic datum tie.",
+      "nearest_date_s30_reference": "HLS.S30.T30SWD.2024220T105031.v2.0",
+      "chart_zero_relative_to_NGM_m": null,
+      "chart_zero_source": "Not established in collected sources; do not substitute Port of Nador value."
+    }
+  },
+  "hls": {
+    "stac_api": "https://planetarycomputer.microsoft.com/api/stac/v1",
+    "source": "NASA/USGS Harmonized Landsat and Sentinel-2 v2.0",
+    "collection_s30": "hls2-s30",
+    "collection_l30": "hls2-l30",
+    "citation": "Masek et al. (2021), HLS v2.0. DOI: 10.5067/HLS/HLSS30.002 (S30) and 10.5067/HLS/HLSL30.002 (L30).",
+    "reflectance_scale_factor": 0.0001,
+    "band_map": {
+      "S30": {
+        "blue": "B02",
+        "green": "B03",
+        "red": "B04",
+        "nir": "B08",
+        "qa": "Fmask"
+      },
+      "L30": {
+        "blue": "B02",
+        "green": "B03",
+        "red": "B04",
+        "nir": "B05",
+        "qa": "Fmask"
+      }
+    }
+  },
+  "comparison_data": {
+    "EMODnet": "Data/Open_Bathymetry/EMODnet",
+    "GEBCO": "Data/Open_Bathymetry/GEBCO",
+    "use": "Independent contextual comparison only until source lineage and vertical datum compatibility are confirmed. Never use as validation truth when lineage overlaps the survey."
+  },
+  "tide_status": "Scripts/05_estimate_tides.py fills acquisition anomalies relative to the modeled mean on each local survey date. The user-reported field collection windows are recorded per site; individual sounding times and local gauge validation are unavailable. GOT5.6 anomalies do not assert an absolute tie to either port hydrographic zero.",
+  "pipeline_status": "completed_full_post_dedup_author_run_2026-11-09; primary stages 01-11 regenerated; inspect run metadata and documented limitations before interpretation",
+  "spatial_cv_folds": 5,
+  "spatial_block_size_m": 500,
+  "spatial_buffer_m": 90,
+  "random_scene_subset_repeats": 20,
+  "atl24_version": "002",
+  "atl24_optional_search_window_days": 30,
+  "cross_site_calibration_fractions": [
+    0.0,
+    0.01,
+    0.05,
+    0.1
+  ],
+  "cross_site_calibration_repeats": 5,
+  "spatial_bootstrap_resamples": 500,
+  "prediction_support_distance_m": 90,
+  "prediction_depth_margin_m": 1.0,
+  "primary_diagnostic_model": "RandomForest",
+  "scene_count_levels": [
+    1,
+    2,
+    4,
+    8,
+    12,
+    16,
+    "all"
+  ]
+}

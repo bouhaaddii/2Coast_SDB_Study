@@ -1,0 +1,17 @@
+{
+  "selection": "min mean inner spatial-fold RMSE among quality-ranked scene counts",
+  "candidate_scene_counts": "4, 8, 12, 16, and all available scenes (duplicates removed)",
+  "common_test_mask": "intersection of valid composite pixels across all candidate scene counts",
+  "outer_spatial_folds": 5,
+  "inner_spatial_folds": 3,
+  "block_size_m": 500.0,
+  "buffer_m": 90.0,
+  "models": [
+    "RandomForest",
+    "HistGradientBoosting",
+    "SVR_RBF"
+  ],
+  "tide": "GOT5.6 anomalies relative to site survey-day mean",
+  "random_seed": 20261107,
+  "quality_ranking": "image-only scene_quality.csv score, then absolute date offset, then acquisition time"
+}

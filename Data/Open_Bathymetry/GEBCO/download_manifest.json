@@ -1,0 +1,40 @@
+{
+  "source": "GEBCO_2026 grid and Type Identifier (TID), requested via official GEBCO Download App API",
+  "retrieved_utc": "2026-11-07T13:49:44.721643+00:00",
+  "basket_id": "GEBCO_07_Nov_2026_7d06867fda8b",
+  "request_url": "https://download.gebco.net/api/queue/download/GEBCO_07_Nov_2026_7d06867fda8b",
+  "archive": "GEBCO_2026_two_site_subsets.zip",
+  "archive_sha256": "f0029008c70726fb2e50597f8cd39387bc3dbdc328ee99ba94f1f82f9c2d014c",
+  "files": [
+    {
+      "name": "gebco_2026_n30.49_s30.41_w-9.71_e-9.64_geotiff.tif",
+      "sha256": "39d182fa555b25226fa6cadca8ce060bd244a06f125f190c6dbee4265709ae87",
+      "bytes": 8496
+    },
+    {
+      "name": "gebco_2026_tid_n30.49_s30.41_w-9.71_e-9.64_geotiff.tif",
+      "sha256": "368df7ec6694bc976e242008b4180982f5147088c789dcd843da158f7ee9dbcc",
+      "bytes": 10584
+    },
+    {
+      "name": "gebco_2026_n35.19_s35.1_w-2.47_e-2.35_geotiff.tif",
+      "sha256": "6b0da95175c1d480b82a962b2591b1c040d417285f6d3dd389ad90413694925a",
+      "bytes": 9130
+    },
+    {
+      "name": "gebco_2026_tid_n35.19_s35.1_w-2.47_e-2.35_geotiff.tif",
+      "sha256": "f6b6ab81eb303f0e22cee5035969952776ff8f8102274ee2dca68cb3b76866f9",
+      "bytes": 10902
+    },
+    {
+      "name": "GEBCO_Grid_documentation.pdf",
+      "sha256": "f3ced9f031ff9c7eaf7ec19fe1137c9f37bb7913591dd1f55560eaf3b7eb5201",
+      "bytes": 266395
+    },
+    {
+      "name": "GEBCO_Grid_terms_of_use.pdf",
+      "sha256": "3d0236bbb239fd1b29a432422e2879754f3ce21d75071ac1bf63929401bbb6bd",
+      "bytes": 145503
+    }
+  ]
+}

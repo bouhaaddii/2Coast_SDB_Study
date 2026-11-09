@@ -1,0 +1,17 @@
+{
+  "Ras El Ma / Ras Kebdana": {
+    "survey_date": "2024-08-08",
+    "z_unit_m": "m",
+    "vertical_reference": "Hydrographic zero of the Port of Ras Kebdana",
+    "horizontal_reference": "Lambert Zone 1; Lambert Conic; Clarke 1880; title-block translations ΔX=-31 m, ΔY=-146 m, ΔZ=-47 m",
+    "source_file": "PLAN BATHY RAS LMA_08082024_M25_VF.dwg"
+  },
+  "Anza": {
+    "survey_date": "2022-11-10",
+    "z_unit_m": "m",
+    "horizontal_reference": "Lambert Zone 2; Clarke 1880; title-block translations ΔX=-31 m, ΔY=-146 m, ΔZ=-47 m",
+    "vertical_reference": "Hydrographic zero of the Port of Agadir, Morocco",
+    "vertical_reference_status": "site-local reference; no tie to the Ras El Ma local zero is applied or established in this study"
+  },
+  "interpretation_note": "Anza elevations are referenced to the hydrographic zero of the Port of Agadir; Ras El Ma elevations are referenced to the hydrographic zero of the Port of Ras Kebdana. These are separate local vertical references. The title-block ΔZ geodetic translation is not a tie between the port zeros and was not applied to the survey elevations."
+}

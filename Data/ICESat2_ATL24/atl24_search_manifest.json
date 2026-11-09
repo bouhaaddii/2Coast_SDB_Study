@@ -1,0 +1,35 @@
+{
+  "product": "ATL24",
+  "version": "002",
+  "doi": "10.5067/ATLAS/ATL24.002",
+  "window_days_each_side": 30,
+  "sites": [
+    {
+      "site": "Anza_Agadir",
+      "survey_date": "2022-11-10",
+      "temporal_start": "2022-10-11",
+      "temporal_end": "2022-12-10",
+      "bounding_box_wgs84": [
+        -9.72,
+        30.4,
+        -9.62,
+        30.5
+      ],
+      "granules_found": 0
+    },
+    {
+      "site": "Ras_El_Ma_Ras_Kebdana",
+      "survey_date": "2024-08-08",
+      "temporal_start": "2024-07-09",
+      "temporal_end": "2024-09-07",
+      "bounding_box_wgs84": [
+        -2.48,
+        35.09,
+        -2.34,
+        35.2
+      ],
+      "granules_found": 0
+    }
+  ],
+  "downloaded_files": []
+}

@@ -1,0 +1,3 @@
+site,vertical_reference,documented_components_n,required_components_n,missing_components,u_c_complete_m,U95_complete_m,budget_status
+Anza_Agadir,"Hydrographic zero of the Port of Agadir, Morocco",0,5,measurement_system;vertical_control;survey_water_level_reduction;local_vertical_reference_realization;measurement_corrections,,,INCOMPLETE: full survey TVU not calculated
+Ras_El_Ma_Ras_Kebdana,Hydrographic zero of the Port of Ras Kebdana,0,5,measurement_system;vertical_control;survey_water_level_reduction;local_vertical_reference_realization;measurement_corrections,,,INCOMPLETE: full survey TVU not calculated

@@ -1,0 +1,40 @@
+{
+  "tide_model_anomaly_applied": true,
+  "preliminary_uncorrected": false,
+  "tide_model": "NASA GSFC GOT5.6 via pyTMD",
+  "tide_input": "Astronomical tide anomaly relative to the modeled mean over the local survey date (m)",
+  "survey_day_reference": "Local civil-day GOT5.6 mean; field collection intervals are documented, but individual sounding timestamps are unavailable.",
+  "datum_offset_applied": false,
+  "datum_offset_note": "Subtracting each site’s modeled survey-day mean from its acquisition predictions removes the arbitrary constant GOT5.6 reference. This provides a relative tidal adjustment without asserting an absolute tie to the local hydrographic zero. Outputs remain in each survey’s local hydrographic-zero frame.",
+  "nontidal_water_level_residual_applied": false,
+  "tide_model_limitations": [
+    "Global 1/8-degree harmonic model; coastal wet-node extrapolation limited to 10 km.",
+    "No local-port gauge validation; no meteorological surge or wave setup correction."
+  ],
+  "spatial_folds": 5,
+  "block_size_m": 500.0,
+  "training_exclusion_buffer_m": 90.0,
+  "scene_subset_repeats": 20,
+  "models": [
+    "StumpfLogRatio",
+    "RandomForest",
+    "HistGradientBoosting"
+  ],
+  "composite_scenario_count": 874,
+  "depth_target": "positive-down depth below the site-specific hydrographic zero",
+  "warnings": [],
+  "survey_collection_windows_local": {
+    "Anza_Agadir": {
+      "start": "10:33",
+      "end": "15:16",
+      "timezone": "Africa/Casablanca",
+      "source": "User-reported field collection interval; individual sounding timestamps unavailable."
+    },
+    "Ras_El_Ma_Ras_Kebdana": {
+      "start": "10:13",
+      "end": "16:02",
+      "timezone": "Africa/Casablanca",
+      "source": "User-reported field collection interval; individual sounding timestamps unavailable."
+    }
+  }
+}
