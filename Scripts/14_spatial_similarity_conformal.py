@@ -48,23 +48,6 @@ def group_ids(coords: np.ndarray) -> np.ndarray:
     return np.asarray([f"{x}_{y}" for x, y in block], dtype=object)
 
 
-def conservative_order_statistic(values: np.ndarray, coverage: float) -> float:
-    """Finite-sample split-conformal order statistic over block scores.
-
-    Returns +inf if the number of calibration blocks cannot support the
-    requested nominal coverage with a finite order statistic.
-    """
-    values = np.asarray(values, dtype=float)
-    values = values[np.isfinite(values)]
-    n = len(values)
-    if n == 0:
-        return float("inf")
-    rank = int(math.ceil((n + 1) * coverage))
-    if rank > n:
-        return float("inf")
-    return float(np.sort(values)[rank - 1])
-
-
 def weighted_empirical_quantile(values: np.ndarray, weights: np.ndarray,
                                 coverage: float) -> float:
     """Weighted local quantile; empirical only under spatial dependence."""
@@ -90,31 +73,21 @@ def depth_band(predicted_depth: np.ndarray) -> np.ndarray:
     ).astype(str)
 
 
-def block_summaries(cal_xy: np.ndarray, cal_z: np.ndarray,
-                    cal_abs_error: np.ndarray, cal_band: np.ndarray,
-                    cal_groups: np.ndarray):
-    """Use each calibration block as one spatial unit, not each pixel."""
-    records = []
-    for block in pd.unique(cal_groups):
-        take = cal_groups == block
-        if not take.any():
-            continue
-        record = {
-            "block_id": str(block),
-            "x_m": float(np.mean(cal_xy[take, 0])),
-            "y_m": float(np.mean(cal_xy[take, 1])),
-            "feature": np.mean(cal_z[take], axis=0),
-            # Maximum absolute calibration error gives a conservative
-            # block-level nonconformity score.
-            "score": float(np.max(cal_abs_error[take])),
-        }
-        for band in ("<=5 m", ">5–10 m", ">10 m"):
-            btake = take & (cal_band == band)
-            record[f"score::{band}"] = (
-                float(np.max(cal_abs_error[btake])) if btake.any() else np.nan
-            )
-        records.append(record)
-    return records
+def block_balanced_weights(blocks: np.ndarray) -> np.ndarray:
+    """Give every represented calibration block equal total weight."""
+    blocks = np.asarray(blocks, dtype=object)
+    counts = pd.Series(blocks).value_counts().to_dict()
+    return np.asarray([1.0 / counts[block] for block in blocks], dtype=float)
+
+
+def effective_block_count(weights: np.ndarray, blocks: np.ndarray) -> float:
+    """Effective number of spatial blocks after aggregating pixel weights."""
+    block_mass = pd.Series(np.asarray(weights, dtype=float)).groupby(
+        np.asarray(blocks, dtype=object), sort=False
+    ).sum().to_numpy(dtype=float)
+    if len(block_mass) == 0 or np.sum(block_mass ** 2) == 0:
+        return 0.0
+    return float(block_mass.sum() ** 2 / np.sum(block_mass ** 2))
 
 
 def main():
@@ -133,8 +106,8 @@ def main():
         f"±{PRIMARY_WINDOW_DAYS} days; GOT5.6 anomaly adjustment."
     )
     print(
-        "Three interval methods: global block calibration, predicted-depth "
-        "conditional block calibration, and local geography+spectral weighting."
+        "Three interval methods: equal-block global calibration, predicted-depth "
+        "conditional calibration, and local geography+spectral weighting."
     )
     print(
         "The local weighted method is exploratory; no exact coverage guarantee "
@@ -247,51 +220,48 @@ def main():
                 cal_z = scaler.transform(raw_x[cal_ix])
                 test_z = scaler.transform(raw_x[test0])
                 cal_group_ids = mg[cal_ix]
-                summaries = block_summaries(
-                    mxy[cal_ix], cal_z, cal_abs_error, cal_band, cal_group_ids
-                )
-                if len(summaries) < 3:
+                calibration_blocks = np.unique(cal_group_ids)
+                if len(calibration_blocks) < 3:
                     skipped.append({"site": site_key, "model": model_name, "fold": fold,
                                     "reason": "Fewer than three buffered calibration blocks remain"})
                     continue
-
-                score_all = np.asarray([r["score"] for r in summaries], dtype=float)
-                centers = np.asarray([[r["x_m"], r["y_m"]] for r in summaries])
-                features = np.vstack([r["feature"] for r in summaries])
-
-                # Block-score sets for depth-conditional calibration.
-                band_scores = {}
-                for band in ("<=5 m", ">5–10 m", ">10 m"):
-                    vals = np.asarray([r[f"score::{band}"] for r in summaries], dtype=float)
-                    band_scores[band] = vals[np.isfinite(vals)]
+                global_weights = block_balanced_weights(cal_group_ids)
 
                 for level in alpha_levels:
-                    q_global = conservative_order_statistic(score_all, level)
-                    q_by_band = {
-                        band: conservative_order_statistic(vals, level)
-                        for band, vals in band_scores.items()
-                    }
+                    q_global = weighted_empirical_quantile(
+                        cal_abs_error, global_weights, level
+                    )
 
                     for j, sample in enumerate(test0):
-                        geo_distance = np.sqrt(np.sum((centers - mxy[sample]) ** 2, axis=1))
-                        feature_distance = np.sqrt(np.mean((features - test_z[j]) ** 2, axis=1))
+                        geo_distance = np.sqrt(np.sum((mxy[cal_ix] - mxy[sample]) ** 2, axis=1))
+                        feature_distance = np.sqrt(np.mean((cal_z - test_z[j]) ** 2, axis=1))
                         log_weight = -0.5 * (
                             (geo_distance / SPATIAL_BANDWIDTH_M) ** 2
                             + (feature_distance / FEATURE_BANDWIDTH_RMS) ** 2
                         )
                         log_weight -= np.max(log_weight)
-                        weights = np.exp(log_weight)
-                        effective_blocks = float(weights.sum() ** 2 / np.sum(weights ** 2))
-                        q_local = weighted_empirical_quantile(score_all, weights, level)
+                        local_weights = np.exp(log_weight) * global_weights
+                        effective_blocks = effective_block_count(local_weights, cal_group_ids)
+                        q_local = weighted_empirical_quantile(
+                            cal_abs_error, local_weights, level
+                        )
                         local_fallback = effective_blocks < MIN_EFFECTIVE_CALIBRATION_BLOCKS
                         if local_fallback:
                             q_local = q_global
-                        q_depth = q_by_band.get(str(test_band[j]), q_global)
+                        depth_mask = cal_band == test_band[j]
+                        depth_block_count = len(np.unique(cal_group_ids[depth_mask]))
+                        depth_fallback = depth_block_count < 3
+                        if depth_fallback:
+                            q_depth = q_global
+                        else:
+                            depth_weights = block_balanced_weights(cal_group_ids[depth_mask])
+                            q_depth = weighted_empirical_quantile(
+                                cal_abs_error[depth_mask], depth_weights, level
+                            )
 
                         for method, radius, fallback in (
-                            ("Global block", q_global, False),
-                            ("Predicted-depth conditional", q_depth,
-                             not np.isfinite(q_depth) and np.isfinite(q_global)),
+                            ("Global equal-block", q_global, False),
+                            ("Predicted-depth conditional", q_depth, depth_fallback),
                             ("Local geography + spectrum", q_local, local_fallback),
                         ):
                             all_predictions.append({
@@ -313,7 +283,8 @@ def main():
                                 "upper_m": float(test_prediction[j] + radius),
                                 "covered": bool(abs(test_prediction[j] - my[sample]) <= radius),
                                 "interval_width_m": float(2 * radius),
-                                "calibration_blocks_n": int(len(summaries)),
+                                "calibration_blocks_n": int(len(calibration_blocks)),
+                                "depth_calibration_blocks_n": int(depth_block_count),
                                 "local_effective_blocks_n": effective_blocks,
                                 "fallback_used": bool(fallback),
                                 "tide_case": "GOT5.6_anomaly",
@@ -324,7 +295,7 @@ def main():
                             })
                 print(
                     f"    {model_name}, fold {fold}: fit={len(fit_ix):,}; "
-                    f"calibration blocks={len(summaries)}; test={len(test0):,}",
+                    f"calibration blocks={len(calibration_blocks)}; test={len(test0):,}",
                     flush=True,
                 )
 
@@ -334,7 +305,7 @@ def main():
     out = ROOT / "Results" / "Additional_Analyses"
     out.mkdir(parents=True, exist_ok=True)
     predictions = pd.DataFrame(all_predictions)
-    pred_path = out / "spatial_similarity_conformal_oof.csv.gz"
+    pred_path = out / "spatial_similarity_conformal_v2_oof.csv.gz"
     predictions.to_csv(pred_path, index=False, compression="gzip")
 
     summary = (predictions.groupby(
@@ -352,7 +323,7 @@ def main():
         fallback_fraction=("fallback_used", "mean"),
     ))
     summary["coverage_error"] = summary["empirical_pixel_coverage"] - summary["nominal_coverage"]
-    summary.to_csv(out / "spatial_similarity_conformal_summary.csv", index=False)
+    summary.to_csv(out / "spatial_similarity_conformal_v2_summary.csv", index=False)
 
     block_summary = (predictions.groupby(
         ["site", "model", "nominal_coverage", "interval_method", "block_id"],
@@ -366,7 +337,7 @@ def main():
         local_effective_blocks_median=("local_effective_blocks_n", "median"),
         fallback_fraction=("fallback_used", "mean"),
     ))
-    block_summary.to_csv(out / "spatial_similarity_conformal_block_summary.csv", index=False)
+    block_summary.to_csv(out / "spatial_similarity_conformal_v2_block_summary.csv", index=False)
 
     settings = {
         "method": "Exploratory localized weighted residual calibration by geographic and spectral similarity",
@@ -384,17 +355,17 @@ def main():
         "local_spatial_bandwidth_m": SPATIAL_BANDWIDTH_M,
         "local_feature_bandwidth_standardized_rms": FEATURE_BANDWIDTH_RMS,
         "minimum_effective_calibration_blocks_before_global_fallback": MIN_EFFECTIVE_CALIBRATION_BLOCKS,
-        "score_unit": "maximum absolute error per buffered calibration block",
+        "score_unit": "per-pixel absolute residual; each calibration block receives equal total weight",
         "limitations": [
-            "Spatial block scores may remain dependent; exact finite-sample coverage is not claimed.",
-            "Local weighted intervals are empirical and exploratory under spatial dependence.",
+            "Pixels within spatial blocks remain dependent; exact finite-sample coverage is not claimed.",
+            "Weighted intervals are empirical and exploratory under spatial dependence.",
             "The two sites retain separate local hydrographic zeros; this script does not tie their vertical datums.",
-            "Anza has few 500-m calibration blocks; inspect calibration-block support and infinite intervals before interpretation.",
+            "Anza has few 500-m calibration blocks; report effective calibration support and treat results as exploratory.",
             "This estimates prediction error relative to the supplied survey points; it does not estimate missing survey TVU/U95.",
         ],
         "outputs": [pred_path.name,
-                    "spatial_similarity_conformal_summary.csv",
-                    "spatial_similarity_conformal_block_summary.csv"],
+                    "spatial_similarity_conformal_v2_summary.csv",
+                    "spatial_similarity_conformal_v2_block_summary.csv"],
         "skipped_folds": skipped,
     }
     (out / "spatial_similarity_conformal_settings.json").write_text(
