@@ -106,8 +106,8 @@ def main():
         f"±{PRIMARY_WINDOW_DAYS} days; GOT5.6 anomaly adjustment."
     )
     print(
-        "Three interval methods: equal-block global calibration, predicted-depth "
-        "conditional calibration, and local geography+spectral weighting."
+        "Four interval methods: equal-block global, predicted-depth conditional, "
+        "local geography+spectral, and local geography+spectral within predicted-depth bands."
     )
     print(
         "The local weighted method is exploratory; no exact coverage guarantee "
@@ -258,11 +258,30 @@ def main():
                             q_depth = weighted_empirical_quantile(
                                 cal_abs_error[depth_mask], depth_weights, level
                             )
+                        depth_local_fallback = depth_fallback
+                        depth_local_effective = 0.0
+                        q_depth_local = q_depth
+                        if not depth_fallback:
+                            depth_local_weights = np.exp(
+                                log_weight[depth_mask] - np.max(log_weight[depth_mask])
+                            ) * depth_weights
+                            depth_local_effective = effective_block_count(
+                                depth_local_weights, cal_group_ids[depth_mask]
+                            )
+                            depth_local_fallback = (
+                                depth_local_effective < MIN_EFFECTIVE_CALIBRATION_BLOCKS
+                            )
+                            if not depth_local_fallback:
+                                q_depth_local = weighted_empirical_quantile(
+                                    cal_abs_error[depth_mask], depth_local_weights, level
+                                )
 
                         for method, radius, fallback in (
                             ("Global equal-block", q_global, False),
                             ("Predicted-depth conditional", q_depth, depth_fallback),
                             ("Local geography + spectrum", q_local, local_fallback),
+                            ("Local geography + spectrum within depth band",
+                             q_depth_local, depth_local_fallback),
                         ):
                             all_predictions.append({
                                 "site": site_key,
@@ -286,6 +305,7 @@ def main():
                                 "calibration_blocks_n": int(len(calibration_blocks)),
                                 "depth_calibration_blocks_n": int(depth_block_count),
                                 "local_effective_blocks_n": effective_blocks,
+                                "depth_local_effective_blocks_n": depth_local_effective,
                                 "fallback_used": bool(fallback),
                                 "tide_case": "GOT5.6_anomaly",
                                 "scene_pool": "HLS_Mixed",
@@ -305,7 +325,7 @@ def main():
     out = ROOT / "Results" / "Additional_Analyses"
     out.mkdir(parents=True, exist_ok=True)
     predictions = pd.DataFrame(all_predictions)
-    pred_path = out / "spatial_similarity_conformal_v2_oof.csv.gz"
+    pred_path = out / "spatial_similarity_conformal_v3_oof.csv.gz"
     predictions.to_csv(pred_path, index=False, compression="gzip")
 
     summary = (predictions.groupby(
@@ -323,7 +343,7 @@ def main():
         fallback_fraction=("fallback_used", "mean"),
     ))
     summary["coverage_error"] = summary["empirical_pixel_coverage"] - summary["nominal_coverage"]
-    summary.to_csv(out / "spatial_similarity_conformal_v2_summary.csv", index=False)
+    summary.to_csv(out / "spatial_similarity_conformal_v3_summary.csv", index=False)
 
     block_summary = (predictions.groupby(
         ["site", "model", "nominal_coverage", "interval_method", "block_id"],
@@ -337,7 +357,7 @@ def main():
         local_effective_blocks_median=("local_effective_blocks_n", "median"),
         fallback_fraction=("fallback_used", "mean"),
     ))
-    block_summary.to_csv(out / "spatial_similarity_conformal_v2_block_summary.csv", index=False)
+    block_summary.to_csv(out / "spatial_similarity_conformal_v3_block_summary.csv", index=False)
 
     settings = {
         "method": "Exploratory localized weighted residual calibration by geographic and spectral similarity",
@@ -356,6 +376,7 @@ def main():
         "local_feature_bandwidth_standardized_rms": FEATURE_BANDWIDTH_RMS,
         "minimum_effective_calibration_blocks_before_global_fallback": MIN_EFFECTIVE_CALIBRATION_BLOCKS,
         "score_unit": "per-pixel absolute residual; each calibration block receives equal total weight",
+        "depth_local_method": "Within predicted-depth band, combine geography and standardized spectral similarity; fall back to depth-only or global calibration when effective block support is below threshold.",
         "limitations": [
             "Pixels within spatial blocks remain dependent; exact finite-sample coverage is not claimed.",
             "Weighted intervals are empirical and exploratory under spatial dependence.",
@@ -364,11 +385,11 @@ def main():
             "This estimates prediction error relative to the supplied survey points; it does not estimate missing survey TVU/U95.",
         ],
         "outputs": [pred_path.name,
-                    "spatial_similarity_conformal_v2_summary.csv",
-                    "spatial_similarity_conformal_v2_block_summary.csv"],
+                    "spatial_similarity_conformal_v3_summary.csv",
+                    "spatial_similarity_conformal_v3_block_summary.csv"],
         "skipped_folds": skipped,
     }
-    (out / "spatial_similarity_conformal_settings.json").write_text(
+    (out / "spatial_similarity_conformal_v3_settings.json").write_text(
         json.dumps(settings, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
     print(f"\nWrote interval predictions: {pred_path}")
