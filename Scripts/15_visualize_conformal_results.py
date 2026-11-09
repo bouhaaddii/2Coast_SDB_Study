@@ -136,7 +136,7 @@ def add_compass_rose(ax):
 
 
 def figure_17(table: pd.DataFrame):
-    fig, axes = plt.subplots(2, 2, figsize=(12.4, 8.0), constrained_layout=True)
+    fig, axes = plt.subplots(2, 2, figsize=(12.4, 8.6), constrained_layout=False)
     offsets = np.linspace(-.24, .24, len(METHODS))
     panel_specs = [
         (0, "Anza_Agadir", "HistGradientBoosting"),
@@ -184,8 +184,9 @@ def figure_17(table: pd.DataFrame):
         ax.text(.01, .98, f"({chr(97 + panel)})", transform=ax.transAxes,
                 ha="left", va="top", fontsize=11, fontweight="bold", color="#101828")
     handles, labels = axes.flat[0].get_legend_handles_labels()
+    fig.tight_layout(rect=(0, .12, 1, 1))
     fig.legend(handles, labels, loc="lower center", ncol=4, frameon=False,
-               fontsize=9, bbox_to_anchor=(.5, -.02))
+               fontsize=9, bbox_to_anchor=(.5, .015))
     save_figure(fig, "Figure_17_Conformal_Coverage_and_Width")
 
 
