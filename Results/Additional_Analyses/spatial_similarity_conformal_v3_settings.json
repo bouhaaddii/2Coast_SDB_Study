@@ -1,0 +1,40 @@
+{
+  "method": "Exploratory localized weighted residual calibration by geographic and spectral similarity",
+  "inspiration": [
+    "GeoSIMCP, DOI 10.1080/24694452.2026.2639721",
+    "Depth-conditional conformal SDB, DOI 10.1109/LGRS.2026.3743086"
+  ],
+  "input": "Existing prepared pixel samples and HLS ±30-day quality-weighted composite",
+  "models": [
+    "StumpfLogRatio",
+    "RandomForest",
+    "HistGradientBoosting",
+    "SVR_RBF"
+  ],
+  "tide_case": "GOT5.6 anomaly relative to local survey-day model mean",
+  "confidence_levels": [
+    0.8,
+    0.9
+  ],
+  "outer_validation": "5-fold GroupKFold over 500-m spatial blocks",
+  "calibration_block_fraction_of_outer_training": 0.4,
+  "spatial_buffer_m": 90.0,
+  "local_spatial_bandwidth_m": 1000.0,
+  "local_feature_bandwidth_standardized_rms": 1.0,
+  "minimum_effective_calibration_blocks_before_global_fallback": 3.0,
+  "score_unit": "per-pixel absolute residual; each calibration block receives equal total weight",
+  "depth_local_method": "Within predicted-depth band, combine geography and standardized spectral similarity; fall back to depth-only or global calibration when effective block support is below threshold.",
+  "limitations": [
+    "Pixels within spatial blocks remain dependent; exact finite-sample coverage is not claimed.",
+    "Weighted intervals are empirical and exploratory under spatial dependence.",
+    "The two sites retain separate local hydrographic zeros; this script does not tie their vertical datums.",
+    "Anza has few 500-m calibration blocks; report effective calibration support and treat results as exploratory.",
+    "This estimates prediction error relative to the supplied survey points; it does not estimate missing survey TVU/U95."
+  ],
+  "outputs": [
+    "spatial_similarity_conformal_v3_oof.csv.gz",
+    "spatial_similarity_conformal_v3_summary.csv",
+    "spatial_similarity_conformal_v3_block_summary.csv"
+  ],
+  "skipped_folds": []
+}
