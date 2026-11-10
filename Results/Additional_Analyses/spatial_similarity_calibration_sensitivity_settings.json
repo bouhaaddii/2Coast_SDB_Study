@@ -1,0 +1,48 @@
+{
+  "outer_validation": "5-fold GroupKFold over 500-m blocks",
+  "training_exclusion_buffer_m": 90.0,
+  "calibration_fraction_of_outer_training_blocks": 0.4,
+  "calibration_repeats_per_fold": 10,
+  "models": [
+    "HistGradientBoosting",
+    "SVR_RBF"
+  ],
+  "temporal_window_days": 30,
+  "tide_case": "GOT5.6 anomaly relative to local survey-day model mean",
+  "confidence_levels": [
+    0.8,
+    0.9
+  ],
+  "bandwidths_spatial_m_and_feature_standardized_rms": [
+    [
+      500.0,
+      1.0
+    ],
+    [
+      1000.0,
+      0.5
+    ],
+    [
+      1000.0,
+      1.0
+    ],
+    [
+      1000.0,
+      2.0
+    ],
+    [
+      2000.0,
+      1.0
+    ]
+  ],
+  "reference_bandwidth": [
+    1000.0,
+    1.0
+  ],
+  "interpretation": "Empirical sensitivity assessment; spatial dependence remains and exact finite-sample coverage is not claimed.",
+  "outputs": [
+    "spatial_similarity_calibration_sensitivity_blocks.csv.gz",
+    "spatial_similarity_calibration_sensitivity_summary.csv"
+  ],
+  "skipped_splits": []
+}

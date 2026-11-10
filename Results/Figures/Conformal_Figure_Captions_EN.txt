@@ -1,0 +1,5 @@
+Figure 17. Block-bootstrap empirical coverage and prediction-interval width for the selected site-level models (Anza: HistGradientBoosting; Ras El Ma: SVR_RBF). Points show equal-weight means across held-out 500-m spatial blocks; error bars are 95% block-bootstrap intervals. Dashed red segments mark the nominal coverage targets. The upper row is Anza and the lower row is Ras El Ma.
+
+Figure 18. Spatial distribution of nominal 90% interval width and held-out misses for the local geography-and-spectrum method conditioned on predicted depth. Panels (a,b) show Anza with HistGradientBoosting; panels (c,d) show Ras El Ma with SVR_RBF. Each square represents one 30-m survey pixel. Compass roses indicate UTM grid north. The two sites use distinct local hydrographic zeros; map depths and intervals are not on a common vertical datum.
+
+Figure 19. Block-equal empirical coverage of nominal 90% intervals by predicted-depth band for the selected site-level models. Error bars are 95% block-bootstrap intervals. Parenthetical values give the number of held-out pixels in each band; sparse depth bands should be interpreted cautiously. The dashed line denotes nominal coverage.
