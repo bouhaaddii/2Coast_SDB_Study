@@ -15,8 +15,7 @@ import rasterio
 from PIL import Image
 from matplotlib.colors import Normalize
 from matplotlib.cm import ScalarMappable
-from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, Polygon
-from matplotlib.transforms import Affine2D
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "Results" / "Figures"
@@ -47,19 +46,6 @@ def save(fig, stem: str) -> None:
     fig.savefig(OUT / f"{stem}.png", dpi=500, bbox_inches="tight", facecolor="white")
     fig.savefig(OUT / f"{stem}.pdf", bbox_inches="tight", facecolor="white")
     plt.close(fig)
-
-
-def rounded_box(ax, x, y, w, h, title, body, face=PALE, edge=GRID,
-                title_color=INK, lw=0.8, fs=6.8, title_fs=7.4, radius=0.8):
-    box = FancyBboxPatch((x, y), w, h,
-                         boxstyle=f"round,pad=0.32,rounding_size={radius}",
-                         facecolor=face, edgecolor=edge, linewidth=lw)
-    ax.add_patch(box)
-    ax.text(x + 0.65, y + h - 1.1, title, ha="left", va="top",
-            fontsize=title_fs, weight="bold", color=title_color)
-    ax.text(x + 0.65, y + h - 3.5, body, ha="left", va="top",
-            fontsize=fs, color=INK, linespacing=1.25)
-    return box
 
 
 def arrow(ax, start, end, color=BLUE, lw=0.95, rad=0.0):
@@ -96,7 +82,8 @@ def rgb_at_grid(frame: pd.DataFrame):
         values = frame[f"rho_{band}"].to_numpy(float)
         lo, hi = np.nanpercentile(values, [2, 98])
         stretched = np.clip((values - lo) / (hi - lo if hi > lo else 1.0), 0, 1)
-        channels.append(np.power(stretched, 0.82))
+        # Lift dark water tones slightly while preserving the RGB ordering.
+        channels.append(np.power(stretched, 0.66))
     rgb = np.column_stack(channels)
     xvals = np.sort(frame.x_m.unique())
     yvals = np.sort(frame.y_m.unique())
@@ -143,9 +130,8 @@ def draw_site_input_map(ax, frame: pd.DataFrame, letter: str, site: str,
     ax.scatter(x, y, c=frame.depth_m.to_numpy(float), cmap="cividis",
                norm=depth_norm, s=point_size, linewidths=0.10,
                edgecolors="white", alpha=0.95, zorder=4, rasterized=True)
-    ax.text(0.50, 0.975, f"({letter})  {site}", transform=ax.transAxes,
-            ha="center", va="top", fontsize=6.0, weight="bold", color=INK,
-            bbox={"facecolor": "white", "edgecolor": "none", "alpha": 1.0, "pad": 2.0})
+    ax.set_title(f"({letter})  {site}", loc="left", pad=5,
+                 fontsize=8.2, weight="bold", color=INK)
     ax.set_xlim(extent[:2]); ax.set_ylim(extent[2:])
     ax.set_xlabel(f"Easting offset from {x_origin/1000:.0f} km (km)")
     ax.set_ylabel(f"Northing offset from {y_origin/1000:.0f} km (km)")
@@ -162,20 +148,31 @@ def draw_input_overlay() -> dict[str, pd.DataFrame]:
     frames = {site: quality_weighted_composite(site) for site in sites}
     vmax = 25.0
     norm = Normalize(vmin=0.0, vmax=vmax)
-    fig = plt.figure(figsize=(7.25, 3.25))
+    fig = plt.figure(figsize=(7.25, 3.45))
     grid = fig.add_gridspec(1, 3, width_ratios=[1, 1, 0.045],
-                            left=0.09, right=0.94, bottom=0.22, top=0.91, wspace=0.20)
+                            left=0.09, right=0.94, bottom=0.25, top=0.86, wspace=0.20)
     draw_site_input_map(fig.add_subplot(grid[0, 0]), frames[sites[0]], "A",
-                        "Anza / Agadir", norm, point_size=1.65)
+                        "Anza / Agadir", norm, point_size=1.25)
     draw_site_input_map(fig.add_subplot(grid[0, 1]), frames[sites[1]], "B",
-                        "Ras El Ma / Ras Kebdana", norm, point_size=1.30)
+                        "Ras El Ma / Ras Kebdana", norm, point_size=0.95)
     cax = fig.add_subplot(grid[0, 2])
     sm = ScalarMappable(norm=norm, cmap="cividis"); sm.set_array([])
     cb = fig.colorbar(sm, cax=cax)
-    cb.set_label("Survey depth below local port zero (m; positive down)", fontsize=6.4, labelpad=6)
+    cb.set_label("Survey depth below local port zero (m; positive down)", fontsize=6.2, labelpad=6)
     cb.ax.tick_params(labelsize=6.0, length=2)
-    fig.text(0.50, 0.065,
-             "HLS RGB composite at retained 30 m cells; small coloured points show the corresponding surveyed cell-depth medians.",
+    from matplotlib.lines import Line2D
+    legend_handles = [
+        Line2D([0], [0], color="#6B8175", linewidth=6, solid_capstyle="butt",
+               label="HLS RGB reflectance composite (B04/B03/B02)"),
+        Line2D([0], [0], marker="o", linestyle="none", markerfacecolor="#667894",
+               markeredgecolor="white", markeredgewidth=0.45, markersize=4.5,
+               label="Measured 30 m cell-depth median"),
+    ]
+    fig.legend(handles=legend_handles, loc="lower center", bbox_to_anchor=(0.49, 0.105),
+               ncol=2, frameon=False, fontsize=6.1, handlelength=1.8,
+               columnspacing=1.7, handletextpad=0.65)
+    fig.text(0.49, 0.038,
+             "Reflectance forms the map background; depth-coloured points are overlaid at the matching sample-cell locations.",
              ha="center", va="center", fontsize=5.9, color=MUTED)
     save(fig, "Figure_Sampled_HLS_RGB_Bathymetry_Overlay")
     return frames
@@ -186,174 +183,163 @@ def draw_map_based_workflow(frames: dict[str, pd.DataFrame]) -> None:
     depth_norm = Normalize(vmin=0.0, vmax=25.0)
     cmap = plt.get_cmap("cividis")
 
-    def depth_rgba(frame: pd.DataFrame):
-        _, xv, yv = rgb_at_grid(frame)
-        ix = np.searchsorted(xv, frame.x_m.to_numpy(float))
-        iy = np.searchsorted(yv, frame.y_m.to_numpy(float))
-        image = np.zeros((len(yv), len(xv), 4), dtype=float)
-        rgba = cmap(depth_norm(frame.depth_m.to_numpy(float)))
-        image[iy, ix] = rgba
-        return image
+    def prediction_sheet(height_px=150):
+        tiles = []
+        for site in sites:
+            path = ROOT / "Results" / "Predictions" / "Maps" / f"{site}_RandomForest_supported_depth.tif"
+            with rasterio.open(path) as src:
+                values = src.read(1, masked=True).filled(np.nan).astype(float)
+                rgba = cmap(depth_norm(np.nan_to_num(values, nan=0.0)))
+                rgba[..., 3] = np.isfinite(values).astype(float)
+                tile = Image.fromarray(np.uint8(np.clip(rgba * 255, 0, 255)), mode="RGBA")
+                width = max(1, int(round(height_px * (src.bounds.right - src.bounds.left) /
+                                         (src.bounds.top - src.bounds.bottom))))
+                tiles.append(tile.resize((width, height_px), Image.Resampling.NEAREST))
+        gap = 14
+        canvas = Image.new("RGBA", (sum(tile.width for tile in tiles) + gap, height_px),
+                           (255, 255, 255, 0))
+        x = 0
+        for tile in tiles:
+            canvas.alpha_composite(tile, (x, 0))
+            x += tile.width + gap
+        return np.asarray(canvas)
 
-    def pair_texture(site_arrays, aspect_values, height_px=240):
-        gap = 24
-        widths = [max(1, int(round(height_px * aspect))) for aspect in aspect_values]
-        canvas = Image.new("RGBA", (sum(widths) + gap, height_px), (255, 255, 255, 0))
-        xoff = 0
-        for array, width in zip(site_arrays, widths):
-            rgba8 = np.clip(array * 255, 0, 255).astype(np.uint8)
-            tile = Image.fromarray(rgba8, mode="RGBA").resize(
-                (width, height_px), resample=Image.Resampling.NEAREST)
-            canvas.alpha_composite(tile, (xoff, 0))
-            xoff += width + gap
-        return np.asarray(canvas), canvas.width / canvas.height
-
-    def site_texture(frame: pd.DataFrame, kind: str):
-        rgb, xv, yv = rgb_at_grid(frame)
-        d = depth_rgba(frame)
-        if kind == "rgb":
-            texture = rgb
-        elif kind == "depth":
-            texture = d
-        elif kind == "paired":
-            texture = np.zeros_like(rgb)
-            valid = (rgb[..., 3] > 0) & (d[..., 3] > 0)
-            texture[valid, :3] = 0.48 * rgb[valid, :3] + 0.52 * d[valid, :3]
-            texture[valid, 3] = 1.0
-        else:
-            raise ValueError(kind)
-        aspect = (float(xv.max() - xv.min() + 30) /
-                  float(yv.max() - yv.min() + 30))
-        return texture, aspect
-
-    def prediction_texture(site: str):
-        path = ROOT / "Results" / "Predictions" / "Maps" / f"{site}_RandomForest_supported_depth.tif"
-        with rasterio.open(path) as src:
-            values = src.read(1, masked=True).filled(np.nan).astype(float)
-            aspect = (src.bounds.right - src.bounds.left) / (src.bounds.top - src.bounds.bottom)
-        rgba = cmap(depth_norm(np.nan_to_num(values, nan=0.0)))
-        rgba[..., 3] = np.isfinite(values).astype(float)
-        return np.flipud(rgba), aspect
-
-    def sheet(kind: str):
-        textures, aspects = zip(*(site_texture(frames[s], kind) for s in sites))
-        return pair_texture(textures, aspects)
-
-    rgb_sheet, rgb_aspect = sheet("rgb")
-    depth_sheet, depth_aspect = sheet("depth")
-    paired_sheet, paired_aspect = sheet("paired")
-    pred_arrays, pred_aspects = zip(*(prediction_texture(s) for s in sites))
-    pred_sheet, pred_aspect = pair_texture(pred_arrays, pred_aspects, height_px=240)
-
-    fig, ax = plt.subplots(figsize=(7.25, 5.2))
+    fig, ax = plt.subplots(figsize=(7.25, 4.65))
     ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.axis("off")
-    x0, sheet_w, sheet_h = 4.3, 43.5, 15.7
-    shear, yscale = 0.30, 0.72
 
-    def draw_plane(image, y0, label, edge, zorder, site_aspects=None):
-        corners = [(x0, y0), (x0 + sheet_w, y0),
-                   (x0 + sheet_w + shear * sheet_h, y0 + yscale * sheet_h),
-                   (x0 + shear * sheet_h, y0 + yscale * sheet_h)]
-        ax.add_patch(Polygon(corners, closed=True, facecolor="white", edgecolor=edge,
-                             linewidth=0.8, joinstyle="round", zorder=zorder))
-        local_transform = Affine2D.from_values(1, 0, shear, yscale, x0, y0)
-        transform = local_transform + ax.transData
-        ax.imshow(image, extent=(0, sheet_w, 0, sheet_h), origin="lower",
-                  interpolation="nearest", transform=transform, zorder=zorder + 1,
-                  aspect="auto")
-        ax.add_patch(Polygon(corners, closed=True, facecolor="none", edgecolor=edge,
-                             linewidth=0.65, joinstyle="round", zorder=zorder + 2))
-        ax.text(3.8, y0 + yscale * sheet_h * 0.48, label, ha="right", va="center",
-                fontsize=6.1, weight="bold", color=edge,
-                bbox={"facecolor": "white", "edgecolor": "none", "alpha": 0.94, "pad": 1.1},
-                zorder=zorder + 4)
-        if site_aspects:
-            hpx = 240
-            gap_px = 24
-            widths = [hpx * a for a in site_aspects]
-            total_px = sum(widths) + gap_px
-            centers = [widths[0] / 2,
-                       widths[0] + gap_px + widths[1] / 2]
-            for center, name in zip(centers, ("A", "B")):
-                tx = sheet_w * center / total_px
-                ty = sheet_h * 0.78
-                px, py = local_transform.transform((tx, ty))
-                ax.text(px, py, name, ha="center", va="center", fontsize=5.8,
-                        color=INK, bbox={"facecolor": "white", "edgecolor": "none",
-                                        "alpha": 0.90, "pad": 0.9}, zorder=zorder + 5)
+    # The blue database header and grouped input lanes follow the supplied
+    # example: sources at the top, vertical preparation steps, then outputs.
+    ax.add_patch(FancyBboxPatch((41, 94), 18, 4.2,
+        boxstyle="round,pad=0.25,rounding_size=0.8", facecolor="#8CCFE5",
+        edgecolor=NAVY, linewidth=0.75))
+    ax.text(50, 96.1, "DATABASE", ha="center", va="center",
+            fontsize=8.2, weight="bold", color=NAVY)
+    ax.add_patch(FancyBboxPatch((1.2, 37.5), 97.6, 54.5,
+        boxstyle="round,pad=0.3,rounding_size=0.6", facecolor="#FCFDFC",
+        edgecolor="#77A66D", linewidth=0.85, linestyle=(0, (3, 2))))
+    ax.text(2.5, 90.5, "INPUT DATA AND PRE-PROCESSING", ha="left", va="center",
+            fontsize=7.2, weight="bold", color="#54834A")
 
-    # The exploded map stack contains the actual site-specific HLS composite,
-    # survey-cell depths, and their co-registered overlay.
-    draw_plane(paired_sheet, 42.5, "CO-REGISTERED\nINPUTS", BLUE, 10)
-    draw_plane(depth_sheet, 56.0, "SURVEY\nDEPTH", GOLD, 20)
-    draw_plane(rgb_sheet, 69.5, "HLS RGB\nCOMPOSITE", TEAL, 30,
-               [site_texture(frames[s], "rgb")[1] for s in sites])
+    xs = [3.0, 27.0, 51.0, 75.0]
+    w = 22.0
+    lane_titles = ["Satellite reflectance", "Bathymetric survey", "Tide-model covariate",
+                   "Open bathymetry"]
+    source_text = ["HLS v2.0\nS30 + L30", "XYZ soundings\nlocal port zeros",
+                   "GOT5.6 + pyTMD\nharmonic tide", "EMODnet + GEBCO"]
+    lane_edges = [TEAL, GOLD, "#8972B4", "#8997A0"]
+    for x, title, source, edge in zip(xs, lane_titles, source_text, lane_edges):
+        ax.add_patch(FancyBboxPatch((x, 82.8), w, 6.0,
+            boxstyle="round,pad=0.25,rounding_size=0.45", facecolor="#EDF5E9",
+            edgecolor="#75A56B", linewidth=0.65))
+        ax.text(x + w / 2, 85.8, title, ha="center", va="center",
+                fontsize=7.0, weight="bold", color="#416D39")
+        ax.add_patch(FancyBboxPatch((x, 75.5), w, 5.3,
+            boxstyle="round,pad=0.22,rounding_size=0.4", facecolor="white",
+            edgecolor=edge, linewidth=0.65))
+        ax.text(x + w / 2, 78.15, source, ha="center", va="center",
+                fontsize=5.6, weight="bold", color=INK, linespacing=1.05)
+        arrow(ax, (x + w / 2, 75.2), (x + w / 2, 73.4), color=edge, lw=0.8)
 
-    # Data-source labels and arrows mirror the supplied exploded-layer style.
-    rounded_box(ax, 64.0, 82.0, 34.0, 12.0, "Satellite reflectance",
-                "HLS v2.0 · S30 Sentinel-2 + L30 Landsat 8/9\n30 m · B02/B03/B04 + harmonized NIR",
-                face="white", edge=TEAL, title_color=TEAL, fs=6.0, title_fs=7.0, radius=0.8)
-    rounded_box(ax, 64.0, 66.5, 34.0, 12.0, "Bathymetric observations",
-                "XYZ soundings · 30 m cell medians\nAnza 10 Nov 2022 · Ras El Ma 8 Aug 2024",
-                face="white", edge=GOLD, title_color=GOLD, fs=6.0, title_fs=7.0, radius=0.8)
-    rounded_box(ax, 64.0, 51.0, 34.0, 12.0, "Tide-model covariate",
-                "pyTMD + GOT5.6 overpass anomaly\nRelative to survey-day mean; no local gauge tie",
-                face="white", edge="#8972B4", title_color="#72579B", fs=5.9, title_fs=7.0, radius=0.8)
-    arrow(ax, (63.3, 87.5), (54.5, 82.0), color=TEAL, lw=0.85)
-    arrow(ax, (63.3, 72.0), (54.5, 69.0), color=GOLD, lw=0.85)
-    arrow(ax, (63.3, 56.0), (54.5, 53.0), color="#8972B4", lw=0.85)
+    def stage_box(x, y, text, edge, face="white", fs=6.0):
+        ax.add_patch(FancyBboxPatch((x + 0.7, y), w - 1.4, 6.0,
+            boxstyle="round,pad=0.2,rounding_size=0.35", facecolor=face,
+            edgecolor=edge, linewidth=0.6))
+        ax.text(x + w / 2, y + 3.0, text, ha="center", va="center",
+                fontsize=fs, color=INK, linespacing=1.08)
 
-    # Processing and evaluation stages continue beneath the stacked inputs.
-    rounded_box(ax, 2.0, 25.0, 29.5, 13.0, "Pre-processing",
-                "HLS Fmask + common-band harmonization\nXYZ projection + duplicate removal\n30 m cell medians; retain local zeros",
-                face=SEA, edge=TEAL, title_color=NAVY, fs=6.15, title_fs=7.2, radius=0.8)
-    rounded_box(ax, 35.2, 25.0, 29.5, 13.0, "Sample construction",
-                "Quality-weighted four-band composite · ±30 d\nMatch cell depth + relative tide anomaly\nKeep the two local vertical references",
-                face="#EAF2F8", edge=BLUE, title_color=NAVY, fs=6.15, title_fs=7.2, radius=0.8)
-    rounded_box(ax, 68.4, 25.0, 29.5, 13.0, "Models and validation",
-                "Stumpf · RF · HGB · RBF-SVR\nFive spatial folds · 500 m blocks\n90 m buffer · out-of-fold scores",
-                face="#FFF4E5", edge=GOLD, title_color=NAVY, fs=6.05, title_fs=7.2, radius=0.8)
-    arrow(ax, (32.0, 31.5), (34.7, 31.5), color=BLUE, lw=0.85)
-    arrow(ax, (65.2, 31.5), (67.9, 31.5), color=BLUE, lw=0.85)
-    arrow(ax, (48.0, 42.0), (17.0, 38.2), color=TEAL, lw=0.75, rad=0.12)
-    arrow(ax, (81.0, 50.7), (50.0, 38.2), color="#8972B4", lw=0.75, rad=-0.10)
+    lane_stages = [
+        ["Cloud / invalid-pixel screening", "Harmonize B02/B03/B04 + NIR", "Quality-weighted composite · ±30 d"],
+        ["Transform XYZ to local UTM", "Review exact XY duplicates", "Median depth per 30 m cell"],
+        ["Predict tide at 10 min steps", "Sample each scene overpass", "Subtract survey-day mean"],
+    ]
+    for lane, x in enumerate(xs[:3]):
+        ys = [67.2, 58.0, 48.8]
+        for j, (y, text) in enumerate(zip(ys, lane_stages[lane])):
+            stage_box(x, y, text, lane_edges[lane], fs=5.9)
+            if j < 2:
+                arrow(ax, (x + w / 2, y - 0.35), (x + w / 2, y - 2.3),
+                      color=lane_edges[lane], lw=0.75)
+        out_text = ["FOUR-BAND COMPOSITE", "30 m DEPTH CELLS", "RELATIVE TIDE ANOMALY"][lane]
+        ax.add_patch(FancyBboxPatch((x, 40.0), w, 6.0,
+            boxstyle="round,pad=0.23,rounding_size=0.35", facecolor="#DCEFD7",
+            edgecolor="#6D9B61", linewidth=0.7))
+        ax.text(x + w / 2, 43.0, out_text, ha="center", va="center",
+                fontsize=6.0, weight="bold", color="#315D2C")
+        arrow(ax, (x + w / 2, 48.4), (x + w / 2, 46.4), color=lane_edges[lane], lw=0.75)
 
-    # Show actual supported Random Forest outputs saved by the completed run.
-    output_extent = (2.5, 45.0, 4.0, 21.0)
-    ax.imshow(pred_sheet, extent=output_extent, origin="lower", interpolation="nearest",
-              aspect="auto", zorder=2)
-    ax.add_patch(Polygon([(output_extent[0], output_extent[2]),
-                          (output_extent[1], output_extent[2]),
-                          (output_extent[1], output_extent[3]),
-                          (output_extent[0], output_extent[3])], closed=True,
-                         facecolor="none", edgecolor=GRID, linewidth=0.7, zorder=3))
-    ax.text(output_extent[0], 22.4, "SUPPORTED BATHYMETRY OUTPUT · RANDOM FOREST",
-            fontsize=6.1, weight="bold", color=NAVY, ha="left", va="bottom")
-    # Compact depth key in the gap beside the pair of actual prediction maps.
-    gradient = np.linspace(0.0, 1.0, 128).reshape(-1, 1)
-    ax.imshow(gradient, extent=(47.0, 48.0, 4.5, 18.0), origin="lower",
-              aspect="auto", cmap=cmap, zorder=2)
-    ax.add_patch(Polygon([(47.0, 4.5), (48.0, 4.5), (48.0, 18.0), (47.0, 18.0)],
-                         closed=True, facecolor="none", edgecolor=GRID,
-                         linewidth=0.5, zorder=3))
-    ax.text(47.5, 19.0, "m", fontsize=4.8, color=MUTED, ha="center", va="bottom")
-    for value in (0, 10, 20, 25):
-        ytick = 4.5 + 13.5 * value / 25.0
-        ax.plot([48.0, 48.35], [ytick, ytick], color=MUTED, lw=0.45, zorder=4)
-        ax.text(48.5, ytick, str(value), fontsize=4.4, color=MUTED,
-                ha="left", va="center")
-    ax.text(53.0, 20.0,
-            "Reported results\nSpatially held-out RMSE, MAE and bias\nDepth-stratified errors + block-bootstrap intervals\nTide, scene/sensor and cross-site sensitivity\n\nFull-data maps are limited to 90 m from survey support;\naccuracy claims use out-of-fold predictions.\n\nLeft: Anza / Agadir · Right: Ras El Ma / Ras Kebdana\nEach map keeps its local port zero.\nEMODnet / GEBCO: source context only.",
-            fontsize=5.8, color=INK, ha="left", va="top", linespacing=1.16,
-            bbox={"boxstyle": "round,pad=0.5", "facecolor": PALE,
-                  "edgecolor": GRID, "linewidth": 0.65})
+    # Open grids are shown as context only and have no connection to training,
+    # validation or vertical-datum adjustment.
+    ax.add_patch(FancyBboxPatch((xs[3] + 0.7, 49.0), w - 1.4, 24.0,
+        boxstyle="round,pad=0.25,rounding_size=0.4", facecolor="#F4F5F5",
+        edgecolor="#8997A0", linewidth=0.65, linestyle=(0, (2, 1))))
+    ax.text(xs[3] + w / 2, 67.5, "Reproject / inspect\nsource coverage and\nproduct metadata",
+            ha="center", va="center", fontsize=6.1, color=INK, linespacing=1.25)
+    ax.text(xs[3] + w / 2, 55.5, "CONTEXT MAPS ONLY\nNot training truth\nNo datum substitution",
+            ha="center", va="center", fontsize=6.0, weight="bold", color="#687780",
+            linespacing=1.2)
+    ax.add_patch(FancyBboxPatch((xs[3], 40.0), w, 6.0,
+        boxstyle="round,pad=0.23,rounding_size=0.35", facecolor="#EEF0F1",
+        edgecolor="#8997A0", linewidth=0.65))
+    ax.text(xs[3] + w / 2, 43.0, "SOURCE CONTEXT", ha="center", va="center",
+            fontsize=6.0, weight="bold", color="#687780")
+
+    # Three actual study inputs converge on a common pixel table; open grids
+    # deliberately do not feed this overlay.
+    ax.add_patch(FancyBboxPatch((8.0, 28.8), 66.0, 7.2,
+        boxstyle="round,pad=0.28,rounding_size=0.45", facecolor="#E6F3F2",
+        edgecolor=TEAL, linewidth=0.8))
+    ax.text(41.0, 33.7, "COMMON 30 m PIXEL OVERLAY", ha="center", va="center",
+            fontsize=7.2, weight="bold", color=NAVY)
+    ax.text(41.0, 30.8,
+            "HLS reflectance + surveyed depth + weighted tide anomaly; retain each local port zero",
+            ha="center", va="center", fontsize=6.1, color=INK)
+    for x, color in zip(xs[:3], lane_edges[:3]):
+        arrow(ax, (x + w / 2, 39.6), (x + w / 2, 36.3), color=color, lw=0.8)
+    arrow(ax, (41, 28.4), (41, 26.6), color=BLUE, lw=0.9)
+
+    ax.add_patch(FancyBboxPatch((13.0, 19.4), 56.0, 6.5,
+        boxstyle="round,pad=0.28,rounding_size=0.45", facecolor="#EAF1F8",
+        edgecolor=BLUE, linewidth=0.75))
+    ax.text(41.0, 23.6, "BATHYMETRY ESTIMATORS", ha="center", va="center",
+            fontsize=7.0, weight="bold", color=NAVY)
+    ax.text(41.0, 21.0, "Stumpf log-ratio  ·  Random Forest  ·  HistGradientBoosting  ·  RBF-SVR",
+            ha="center", va="center", fontsize=6.0, color=INK)
+
+    # Split model use into held-out evaluation and a supported full-data map.
+    left_card = FancyBboxPatch((2.5, 3.7), 46.0, 12.8,
+        boxstyle="round,pad=0.28,rounding_size=0.45", facecolor="#FFF4E5",
+        edgecolor=GOLD, linewidth=0.8)
+    right_card = FancyBboxPatch((51.5, 3.7), 46.0, 12.8,
+        boxstyle="round,pad=0.28,rounding_size=0.45", facecolor="#F1F6F8",
+        edgecolor=BLUE, linewidth=0.8)
+    ax.add_patch(left_card); ax.add_patch(right_card)
+    ax.text(25.5, 14.3, "SPATIAL HOLD-OUT EVALUATION", ha="center", va="center",
+            fontsize=6.8, weight="bold", color="#9A6423")
+    ax.text(25.5, 8.9,
+            "5 grouped folds · 500 m blocks · 90 m buffer\nOut-of-fold RMSE, MAE, bias and depth-stratified errors\nBlock-bootstrap intervals and sensitivity analyses",
+            ha="center", va="center", fontsize=5.8, color=INK, linespacing=1.32)
+    ax.text(74.5, 14.3, "SUPPORTED FULL-DATA MAPS", ha="center", va="center",
+            fontsize=6.8, weight="bold", color=NAVY)
+    ax.text(74.5, 12.4, "Random Forest · within 90 m of survey support",
+            ha="center", va="center", fontsize=5.3, color=INK)
+    ax.imshow(prediction_sheet(), extent=(56.5, 91.5, 5.5, 11.7), origin="lower",
+              interpolation="nearest", aspect="auto", zorder=2)
+    ax.text(66.0, 4.8, "A  Anza / Agadir", ha="center", va="center",
+            fontsize=5.0, color=MUTED)
+    ax.text(82.0, 4.8, "B  Ras El Ma / Ras Kebdana", ha="center", va="center",
+            fontsize=5.0, color=MUTED)
+    arrow(ax, (33, 19.0), (25.5, 16.8), color=GOLD, lw=0.85)
+    arrow(ax, (49, 19.0), (74.5, 16.8), color=BLUE, lw=0.85)
+    ax.text(50, 1.4,
+            "Accuracy is reported from held-out folds; fitted maps visualise spatial patterns only.",
+            ha="center", va="center", fontsize=5.7, color=MUTED)
     save(fig, "Figure3_MapBased_Methods_Workflow_TwoCoast")
 
 
 def write_captions_and_attribution() -> None:
-    captions = """Figure 2. HLS surface-reflectance composite and bathymetric observations at retained 30 m cells. Panels A and B show Anza / Agadir and Ras El Ma / Ras Kebdana, respectively. The RGB background is the quality-weighted composite from B04/B03/B02 at sampled cells; small points show the corresponding median survey depth in each 30 m cell. RGB contrast is stretched independently by site. Depth is positive downward and referenced to each site's local port hydrographic zero; no common vertical datum or interpolated seabed surface is implied. Axes show local UTM offsets.
+    captions = """Figure 2. Overlay of HLS reflectance and measured bathymetric samples on the same 30 m grid. Panels A and B show Anza / Agadir and Ras El Ma / Ras Kebdana, respectively. The RGB map background displays the quality-weighted B04/B03/B02 surface-reflectance composite; depth-coloured points mark the measured median depth in each matching 30 m cell. RGB contrast is stretched independently for each site. Depth is positive downward from each site's local port hydrographic zero; no common vertical datum or interpolated seabed surface is implied. Axes show local UTM offsets.
 
-Figure 3. Map-overlay workflow for the two-coast satellite-derived bathymetry study. The exploded input layers show quality-weighted HLS RGB composites, surveyed depth medians on the 30 m grid, and the co-registered paired inputs for Anza / Agadir and Ras El Ma / Ras Kebdana. Source arrows identify HLS v2.0 S30/L30 reflectance, the local XYZ surveys and the relative GOT5.6 anomaly calculated with pyTMD. The workflow summarizes band screening and harmonization, survey preparation, sample pairing, depth estimators and buffered spatial validation. The lower maps show saved full-data Random Forest predictions within the 90 m support limit; accuracy is assessed from out-of-fold predictions. Depths retain their separate local port zeros. EMODnet and GEBCO are context grids only.
+Figure 3. Source-to-output workflow for the two-coast satellite-derived bathymetry study, arranged as parallel data-source lanes. HLS S30/L30 reflectance, local XYZ soundings and GOT5.6/pyTMD tide anomalies pass through their respective screening and preparation steps before being overlaid on matched 30 m cells. Stumpf log-ratio, Random Forest, HistGradientBoosting and RBF-SVR are evaluated with five grouped spatial folds, 500 m blocks and a 90 m buffer. The lower-right maps are saved full-data Random Forest predictions within 90 m of survey support; performance claims use out-of-fold predictions. Each site's depths retain its local port zero. EMODnet and GEBCO are shown as source context only and do not enter model fitting or validation.
 """
     (OUT / "Materials_Methods_Additional_Captions_EN.txt").write_text(captions, encoding="utf-8")
     credits = """Third-party logo source notes for the methods workflow figure
