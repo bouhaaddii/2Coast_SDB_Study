@@ -36,6 +36,7 @@ HLS v2.0 source collections and identifiers are recorded in `Config/experiment.j
 - Primary optical composites: 30-day window, quality-weighted mean, with a 14-day sensitivity analysis.
 - Models: Stumpf log-ratio, Random Forest, HistGradientBoosting, and a fixed RBF-SVR benchmark (`C=10`, `epsilon=0.1 m`, `gamma=scale`).
 - Additional analyses: paired tide ablation, nested scene-count selection, cross-site transfer with target-site calibration, depth-stratified errors, and block-bootstrap intervals.
+- Spatial prediction intervals: the project compares global, depth-conditional, and local calibration. Ten repeated calibration-block draws and one-at-a-time bandwidth sensitivity quantify empirical trade-offs; exact finite-sample coverage is not claimed under spatial dependence.
 - Full-data bathymetric maps are supported only within 90 m of valid survey samples. Use held-out spatial predictions and metrics for accuracy claims; the fitted maps are visualization products.
 
 The two hydrographic zeros are local and not tied to a common vertical datum. Cross-site absolute-depth transfer therefore requires target-site calibration and must not be interpreted as datum-free transfer. The available DWG plans and XYZ exports do not quantify the survey instrument, vertical control, water-level reduction, local datum realization, or correction uncertainties. A complete survey TVU/U95 cannot be calculated from the available records. See the diagnostics in `Results/Additional_Analyses/survey_vertical_uncertainty_budget.csv` and `survey_window_tide_timing_diagnostic.csv`.
@@ -84,6 +85,8 @@ Available-data diagnostics can be run separately:
 - `Results/Tides/`: GOT5.6 acquisition and survey-window calculations.
 - `Results/Figures/`: publication-oriented figure pairs in PNG and PDF.
 - `Results/Logs/run_metadata.json`: run settings and tide/datum limitations.
+
+Script 17 generates Figure 20 and its caption from the saved bandwidth-sensitivity summary. It also writes a reference-method comparison table for global, depth-conditional, and local-plus-depth intervals.
 
 ## Data and reuse
 
