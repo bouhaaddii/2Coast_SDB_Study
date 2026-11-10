@@ -1,0 +1,9 @@
+Third-party logo source notes for the methods workflow figure
+
+ESA Sentinel-2 mission logo: https://www.esa.int/eologos/sentinel-2.html
+Direct official asset: https://download.esa.int/multimedia/mission_logos/EO/sentinel-2_logo/sentinel-2.jpg
+
+Python Powered logo: Python Software Foundation, official logo downloads and usage guidance:
+https://www.python.org/community/logos/
+
+The NASA and USGS identifiers are shown as plain text only. NASA's brand guidance states its insignia/logotype are protected and subject to restrictions; USGS reserves its visual identifier for official use and authorized partners. No NASA or USGS logo is included. Logos in the figure identify source mission/software only and do not imply endorsement.
