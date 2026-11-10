@@ -13,8 +13,10 @@ import numpy as np
 import pandas as pd
 from matplotlib.colors import Normalize
 from matplotlib.cm import ScalarMappable
-from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, Patch
+from matplotlib.lines import Line2D
 from matplotlib.path import Path as MplPath
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "Results" / "Figures"
@@ -117,69 +119,99 @@ def add_scalebar(ax, length_m=1000.0):
             zorder=8)
 
 
-def draw_site_input_map(ax, frame: pd.DataFrame, letter: str, site: str,
-                        depth_norm: Normalize, point_size: float = 1.7):
-    image, xv, yv = rgb_at_grid(frame)
-    half_x = float(np.median(np.diff(xv))) / 2 if len(xv) > 1 else 15.0
-    half_y = float(np.median(np.diff(yv))) / 2 if len(yv) > 1 else 15.0
-    x_origin = np.floor(float(xv.min()) / 1000.0) * 1000.0
-    y_origin = np.floor(float(yv.min()) / 1000.0) * 1000.0
-    extent = ((xv.min() - half_x - x_origin) / 1000,
-              (xv.max() + half_x - x_origin) / 1000,
-              (yv.min() - half_y - y_origin) / 1000,
-              (yv.max() + half_y - y_origin) / 1000)
-    ax.set_facecolor("#EAF1F4")
-    ax.imshow(image, origin="lower", extent=extent, interpolation="nearest",
-              aspect="equal", zorder=1)
-    x = (frame.x_m.to_numpy(float) - x_origin) / 1000
-    y = (frame.y_m.to_numpy(float) - y_origin) / 1000
-    ax.scatter(x, y, c=frame.depth_m.to_numpy(float), cmap="cividis",
-               norm=depth_norm, s=point_size, linewidths=0.10,
-               edgecolors="white", alpha=0.95, zorder=4, rasterized=True)
-    ax.set_title(f"({letter})  {site}", loc="left", pad=5,
+def rgb_sample_colors(frame: pd.DataFrame) -> np.ndarray:
+    """Return the displayed B04/B03/B02 stretch at the sampled 30 m cells."""
+    channels = []
+    for band in ("red", "green", "blue"):
+        values = frame[f"rho_{band}"].to_numpy(float)
+        lo, hi = np.nanpercentile(values, [2, 98])
+        stretched = np.clip((values - lo) / (hi - lo if hi > lo else 1.0), 0, 1)
+        channels.append(np.power(stretched, 0.66))
+    return np.column_stack(channels)
+
+
+def draw_site_input_stack(ax, frame: pd.DataFrame, letter: str, site: str,
+                          depth_norm: Normalize) -> None:
+    """Draw the actual co-registered HLS and sounding cells as two exploded layers.
+
+    The vertical coordinate separates the input layers for display. It is not
+    bathymetric elevation; the measured depth is encoded only by point colour.
+    """
+    frame = frame.sort_values(["y_m", "x_m"], kind="stable").reset_index(drop=True)
+    x_origin = np.floor(float(frame.x_m.min()) / 1000.0) * 1000.0
+    y_origin = np.floor(float(frame.y_m.min()) / 1000.0) * 1000.0
+    x = (frame.x_m.to_numpy(float) - x_origin) / 1000.0
+    y = (frame.y_m.to_numpy(float) - y_origin) / 1000.0
+    half_cell_km = 0.015
+    rgb_z = 0.0
+    sounding_z = 1.15
+
+    rgb_colors = rgb_sample_colors(frame)
+    cell_faces = [[
+        (xv - half_cell_km, yv - half_cell_km, rgb_z),
+        (xv + half_cell_km, yv - half_cell_km, rgb_z),
+        (xv + half_cell_km, yv + half_cell_km, rgb_z),
+        (xv - half_cell_km, yv + half_cell_km, rgb_z),
+    ] for xv, yv in zip(x, y)]
+    rgb_layer = Poly3DCollection(cell_faces, facecolors=rgb_colors,
+                                 edgecolors="none", linewidths=0,
+                                 antialiaseds=False, zsort="average")
+    ax.add_collection3d(rgb_layer)
+
+    ax.scatter(x, y, np.full(len(frame), sounding_z),
+               c=frame.depth_m.to_numpy(float), cmap="viridis", norm=depth_norm,
+               s=3.0, linewidths=0.14, edgecolors="white", alpha=0.98,
+               depthshade=False, zorder=5, rasterized=True)
+
+    x0, x1 = x.min() - half_cell_km, x.max() + half_cell_km
+    y0, y1 = y.min() - half_cell_km, y.max() + half_cell_km
+    xspan, yspan = x1 - x0, y1 - y0
+    ax.set_xlim(x0, x1); ax.set_ylim(y0, y1); ax.set_zlim(-0.12, 1.48)
+    ax.set_zticks([])
+    ax.set_xlabel("Easting X offset (km)", labelpad=1.0, fontsize=5.7)
+    ax.set_ylabel("Northing Y offset (km)", labelpad=1.0, fontsize=5.7)
+    ax.set_title(f"({letter})  {site}", loc="left", pad=4,
                  fontsize=8.2, weight="bold", color=INK)
-    ax.set_xlim(extent[:2]); ax.set_ylim(extent[2:])
-    ax.set_xlabel(f"Easting offset from {x_origin/1000:.0f} km (km)")
-    ax.set_ylabel(f"Northing offset from {y_origin/1000:.0f} km (km)")
-    ax.xaxis.set_major_locator(plt.MaxNLocator(4))
-    ax.yaxis.set_major_locator(plt.MaxNLocator(4))
-    ax.tick_params(labelsize=6.1, length=2, pad=1.5)
-    ax.grid(color="white", linewidth=0.36, alpha=0.60, zorder=3)
-    ax.set_axisbelow(False)
-    add_scalebar(ax)
+    ax.xaxis.set_major_locator(plt.MaxNLocator(3))
+    ax.yaxis.set_major_locator(plt.MaxNLocator(3))
+    ax.tick_params(axis="x", labelsize=5.2, pad=0.5, length=2)
+    ax.tick_params(axis="y", labelsize=5.2, pad=0.5, length=2)
+    ax.view_init(elev=25, azim=-55)
+    ax.set_proj_type("ortho")
+    ax.set_box_aspect((xspan, yspan, 0.62 * min(xspan, yspan)))
+    for axis in (ax.xaxis, ax.yaxis, ax.zaxis):
+        axis.pane.set_facecolor((0.965, 0.978, 0.985, 1.0))
+        axis.pane.set_edgecolor(GRID)
+        axis._axinfo["grid"]["color"] = (0.78, 0.84, 0.88, 0.52)
+        axis._axinfo["grid"]["linewidth"] = 0.45
 
 
 def draw_input_overlay() -> dict[str, pd.DataFrame]:
     sites = ["Anza_Agadir", "Ras_El_Ma_Ras_Kebdana"]
     frames = {site: quality_weighted_composite(site) for site in sites}
-    vmax = 25.0
+    vmax = 23.0
     norm = Normalize(vmin=0.0, vmax=vmax)
-    fig = plt.figure(figsize=(7.25, 3.45))
+    fig = plt.figure(figsize=(7.25, 4.35))
     grid = fig.add_gridspec(1, 3, width_ratios=[1, 1, 0.045],
-                            left=0.09, right=0.94, bottom=0.25, top=0.86, wspace=0.20)
-    draw_site_input_map(fig.add_subplot(grid[0, 0]), frames[sites[0]], "A",
-                        "Anza / Agadir", norm, point_size=1.25)
-    draw_site_input_map(fig.add_subplot(grid[0, 1]), frames[sites[1]], "B",
-                        "Ras El Ma / Ras Kebdana", norm, point_size=0.95)
+                            left=0.045, right=0.89, bottom=0.22, top=0.89, wspace=0.24)
+    draw_site_input_stack(fig.add_subplot(grid[0, 0], projection="3d"),
+                          frames[sites[0]], "A", "Anza / Agadir", norm)
+    draw_site_input_stack(fig.add_subplot(grid[0, 1], projection="3d"),
+                          frames[sites[1]], "B", "Ras El Ma / Ras Kebdana", norm)
     cax = fig.add_subplot(grid[0, 2])
-    sm = ScalarMappable(norm=norm, cmap="cividis"); sm.set_array([])
+    sm = ScalarMappable(norm=norm, cmap="viridis"); sm.set_array([])
     cb = fig.colorbar(sm, cax=cax)
-    cb.set_label("Survey depth below local port zero (m; positive down)", fontsize=6.2, labelpad=6)
-    cb.ax.tick_params(labelsize=6.0, length=2)
-    from matplotlib.lines import Line2D
+    cb.set_label("Measured depth below local port zero (m; positive down)", fontsize=5.8, labelpad=4)
+    cb.ax.tick_params(labelsize=5.8, length=2)
     legend_handles = [
-        Line2D([0], [0], color="#6B8175", linewidth=6, solid_capstyle="butt",
-               label="HLS RGB reflectance composite (B04/B03/B02)"),
+        Patch(facecolor="#597D75", edgecolor="none", label="Lower layer: HLS RGB composite (B04/B03/B02)"),
         Line2D([0], [0], marker="o", linestyle="none", markerfacecolor="#667894",
                markeredgecolor="white", markeredgewidth=0.45, markersize=4.5,
-               label="Measured 30 m cell-depth median"),
+               label="Upper layer: measured 30 m cell-depth median"),
     ]
     fig.legend(handles=legend_handles, loc="lower center", bbox_to_anchor=(0.49, 0.105),
-               ncol=2, frameon=False, fontsize=6.1, handlelength=1.8,
+               ncol=2, frameon=False, fontsize=5.8, handlelength=1.8,
                columnspacing=1.7, handletextpad=0.65)
-    fig.text(0.49, 0.038,
-             "Reflectance forms the map background; depth-coloured points are overlaid at the matching sample-cell locations.",
-             ha="center", va="center", fontsize=5.9, color=MUTED)
     save(fig, "Figure_Sampled_HLS_RGB_Bathymetry_Overlay")
     return frames
 
