@@ -162,7 +162,7 @@ def make_figure(data: pd.DataFrame) -> None:
                 ax.errorbar(
                     x, y, yerr=np.vstack([low, high]), fmt=marker_by_level[nominal],
                     color=LEVEL_COLORS[nominal], linestyle=MODEL_STYLES[model],
-                    marker=marker_by_level[nominal], markersize=4.4,
+                    markersize=4.4,
                     markerfacecolor="white", markeredgewidth=1.2,
                     linewidth=1.35, capsize=2.5, label=label,
                 )
