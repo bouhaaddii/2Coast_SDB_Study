@@ -163,22 +163,33 @@ def diagnostic_model():
 
 
 def write_figure3(metrics,summary,oof,metadata):
-    fig,axes=plt.subplots(1,2,figsize=(12,5.4),layout='constrained')
+    fold_colors=[plt.get_cmap('tab10')(i) for i in range(5)]
+    fig=plt.figure(figsize=(12,5.9),layout='constrained')
+    gs=fig.add_gridspec(2,2,height_ratios=[1,.10])
+    axes=[fig.add_subplot(gs[0,col]) for col in range(2)]
+    legend_ax=fig.add_subplot(gs[1,:]); legend_ax.set_axis_off()
     for ax,(site_key,site) in zip(axes,CFG['sites'].items()):
         model=diagnostic_model()
         d=oof[(oof.site==site_key)&(oof.model==model)]
         if d.empty: continue
         d=d.drop_duplicates(['sample_index'])
-        ax.scatter(d.x_m,d.y_m,c=d.fold,cmap='tab10',s=8,alpha=0.8,edgecolors='none')
+        folds=pd.to_numeric(d.fold,errors='coerce').fillna(0).astype(int)
+        point_colors=[fold_colors[f-1] if 1<=f<=5 else '#9AA7B0' for f in folds]
+        ax.scatter(d.x_m,d.y_m,c=point_colors,s=8,alpha=0.82,edgecolors='none')
         # Show the fixed 500 m spatial blocks assigned to each held-out fold.
         block=d.assign(bx=np.floor(d.x_m/500).astype(int),by=np.floor(d.y_m/500).astype(int)).groupby(['bx','by']).fold.agg(lambda x:x.mode().iloc[0])
         for (bx,by),fold in block.items():
-            ax.add_patch(Rectangle((bx*500,by*500),500,500,facecolor='none',edgecolor=plt.get_cmap('tab10')((int(fold)-1)%10),lw=0.8,alpha=0.75))
+            fold=int(fold)
+            color=fold_colors[fold-1] if 1<=fold<=5 else '#9AA7B0'
+            ax.add_patch(Rectangle((bx*500,by*500),500,500,facecolor='none',edgecolor=color,lw=0.9,alpha=0.85))
         ax.set_aspect('equal'); ax.xaxis.set_major_formatter(FuncFormatter(lambda v,p:f'{v/1000:.1f}'))
         ax.yaxis.set_major_formatter(FuncFormatter(lambda v,p:f'{v/1000:.1f}'))
         ax.set_xlabel('Easting X (km)'); ax.set_ylabel('Northing Y (km)')
         add_panel_label(ax,'A' if site_key==next(iter(CFG['sites'])) else 'B')
         ax.grid(color='#E4EBEF',lw=0.5)
+    fold_handles=[Patch(facecolor='white',edgecolor=fold_colors[i],linewidth=1.5,label=f'Fold {i+1}') for i in range(5)]
+    legend_ax.legend(handles=fold_handles,loc='center',ncol=5,frameon=False,fontsize=8,
+                     handlelength=1.5,columnspacing=1.8,title='Held-out spatial fold')
     save(fig,'Figure3_spatial_validation_blocks')
 
 
@@ -251,10 +262,12 @@ def write_figure5(metrics,summary):
 
 def write_figure6(summary,oof,metadata):
     from matplotlib.lines import Line2D
-    fig=plt.figure(figsize=(12,8.35),layout='constrained')
-    gs=fig.add_gridspec(3,2,height_ratios=[1,1,0.12])
+    fig=plt.figure(figsize=(12,8.7),layout='constrained')
+    gs=fig.add_gridspec(4,2,height_ratios=[1,1,.10,.12])
     axes=np.array([[fig.add_subplot(gs[row,col]) for col in range(2)] for row in range(2)])
-    legend_ax=fig.add_subplot(gs[2,:]); legend_ax.set_axis_off()
+    colorbar_ax=fig.add_subplot(gs[2,:])
+    legend_ax=fig.add_subplot(gs[3,:]); legend_ax.set_axis_off()
+    residual_scatter=None
     for col,(site_key,site) in enumerate(CFG['sites'].items()):
         model=diagnostic_model()
         d=oof[(oof.site==site_key)&(oof.model==model)].drop_duplicates('sample_index')
@@ -267,7 +280,7 @@ def write_figure6(summary,oof,metadata):
         add_panel_label(ax,'A' if col==0 else 'B')
         fig.colorbar(hb,ax=ax,fraction=0.046,pad=0.02,label='Pixel count (log scale)')
         ax2=axes[1,col]
-        ax2.scatter(d.observed_depth_m,d.residual_m,c=d.residual_m,cmap='RdBu_r',vmin=-2,vmax=2,s=10,alpha=0.55,edgecolors='none')
+        residual_scatter=ax2.scatter(d.observed_depth_m,d.residual_m,c=d.residual_m,cmap='RdBu_r',vmin=-2,vmax=2,s=10,alpha=0.55,edgecolors='none')
         ax2.axhline(0,color=INK,ls='--',lw=0.9)
         qbins=pd.qcut(d.observed_depth_m,q=min(10,max(3,d.observed_depth_m.nunique()//10)),duplicates='drop')
         trend=d.groupby(qbins,observed=False).residual_m.median()
@@ -276,6 +289,9 @@ def write_figure6(summary,oof,metadata):
         ax2.set_xlabel('Survey depth below local zero (m)'); ax2.set_ylabel('Prediction − survey (m)')
         add_panel_label(ax2,'C' if col==0 else 'D')
         ax2.grid(color='#E4EBEF',lw=0.65)
+    cbar=fig.colorbar(residual_scatter,cax=colorbar_ax,orientation='horizontal',ticks=[-2,-1,0,1,2])
+    cbar.set_label('Out-of-fold residual (prediction − survey, m)',labelpad=2)
+    cbar.ax.tick_params(labelsize=7,pad=1)
     shared_handles=[Line2D([0],[0],color=CORAL,ls='--',lw=1.2,label='1:1'),
                     Line2D([0],[0],color=GOLD,lw=2.1,marker='o',ms=3.5,label='Median by depth bin')]
     legend_ax.legend(handles=shared_handles,loc='center',ncol=2,frameon=False,fontsize=7.5)
@@ -293,7 +309,13 @@ def write_figure7(summary,oof):
             levels=np.arange(0,max(2,math.ceil(float(d.observed_depth_m.max())/2)*2)+1,2)
             cf=ax.tricontourf(tri,d.observed_depth_m,levels=levels,cmap='viridis',extend='max')
             ax.tricontour(tri,d.observed_depth_m,levels=levels[::2],colors='white',linewidths=0.45,alpha=0.75)
-            sc=ax.scatter(d.x_m,d.y_m,c=d.residual_m,cmap='RdBu_r',vmin=-2,vmax=2,s=6,edgecolors='none',alpha=0.8)
+            # The Ras El Ma panel has denser points at the same map scale; enlarge
+            # its markers to preserve point visibility without changing the data.
+            marker_size=6 if site_key=='Anza_Agadir' else 28
+            marker_edge='none' if site_key=='Anza_Agadir' else 'white'
+            marker_line=0 if site_key=='Anza_Agadir' else 0.2
+            sc=ax.scatter(d.x_m,d.y_m,c=d.residual_m,cmap='RdBu_r',vmin=-2,vmax=2,
+                          s=marker_size,edgecolors=marker_edge,linewidths=marker_line,alpha=0.92)
             cb=fig.colorbar(cf,ax=ax,shrink=0.82,pad=0.02); cb.set_label('Survey depth below local zero (m)')
             cb2=fig.colorbar(sc,ax=ax,shrink=0.82,pad=0.09); cb2.set_label('Out-of-fold residual (m)')
         ax.xaxis.set_major_formatter(FuncFormatter(lambda v,p:f'{v/1000:.2f}'))
