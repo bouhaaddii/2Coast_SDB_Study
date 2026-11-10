@@ -11,11 +11,10 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import rasterio
-from PIL import Image
 from matplotlib.colors import Normalize
 from matplotlib.cm import ScalarMappable
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+from matplotlib.path import Path as MplPath
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "Results" / "Figures"
@@ -52,6 +51,13 @@ def arrow(ax, start, end, color=BLUE, lw=0.95, rad=0.0):
     ax.add_patch(FancyArrowPatch(start, end, arrowstyle="-|>", mutation_scale=7.5,
                                  linewidth=lw, color=color,
                                  connectionstyle=f"arc3,rad={rad}"))
+
+
+def trajectory(ax, points, color=BLUE, lw=1.05):
+    """Draw a routed cubic arrow that stays clear of the destination labels."""
+    path = MplPath(points, [MplPath.MOVETO, MplPath.CURVE4, MplPath.CURVE4, MplPath.CURVE4])
+    ax.add_patch(FancyArrowPatch(path=path, arrowstyle="-|>", mutation_scale=8,
+                                 linewidth=lw, color=color, zorder=2))
 
 
 def quality_weighted_composite(site: str) -> pd.DataFrame:
@@ -179,30 +185,6 @@ def draw_input_overlay() -> dict[str, pd.DataFrame]:
 
 
 def draw_map_based_workflow(frames: dict[str, pd.DataFrame]) -> None:
-    sites = ["Anza_Agadir", "Ras_El_Ma_Ras_Kebdana"]
-    depth_norm = Normalize(vmin=0.0, vmax=25.0)
-    cmap = plt.get_cmap("cividis")
-
-    def prediction_sheet(height_px=150):
-        tiles = []
-        for site in sites:
-            path = ROOT / "Results" / "Predictions" / "Maps" / f"{site}_RandomForest_supported_depth.tif"
-            with rasterio.open(path) as src:
-                values = src.read(1, masked=True).filled(np.nan).astype(float)
-                rgba = cmap(depth_norm(np.nan_to_num(values, nan=0.0)))
-                rgba[..., 3] = np.isfinite(values).astype(float)
-                tile = Image.fromarray(np.uint8(np.clip(rgba * 255, 0, 255)), mode="RGBA")
-                width = max(1, int(round(height_px * (src.bounds.right - src.bounds.left) /
-                                         (src.bounds.top - src.bounds.bottom))))
-                tiles.append(tile.resize((width, height_px), Image.Resampling.NEAREST))
-        gap = 14
-        canvas = Image.new("RGBA", (sum(tile.width for tile in tiles) + gap, height_px),
-                           (255, 255, 255, 0))
-        x = 0
-        for tile in tiles:
-            canvas.alpha_composite(tile, (x, 0))
-            x += tile.width + gap
-        return np.asarray(canvas)
 
     fig, ax = plt.subplots(figsize=(7.25, 4.65))
     ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.axis("off")
@@ -217,8 +199,11 @@ def draw_map_based_workflow(frames: dict[str, pd.DataFrame]) -> None:
     ax.add_patch(FancyBboxPatch((1.2, 37.5), 97.6, 54.5,
         boxstyle="round,pad=0.3,rounding_size=0.6", facecolor="#FCFDFC",
         edgecolor="#77A66D", linewidth=0.85, linestyle=(0, (3, 2))))
-    ax.text(2.5, 90.5, "INPUT DATA AND PRE-PROCESSING", ha="left", va="center",
-            fontsize=7.2, weight="bold", color="#54834A")
+    ax.add_patch(FancyBboxPatch((2.5, 89.0), 31.5, 2.4,
+        boxstyle="round,pad=0.18,rounding_size=0.35", facecolor="#EDF5E9",
+        edgecolor="#77A66D", linewidth=0.55))
+    ax.text(18.25, 90.2, "INPUT DATA AND PRE-PROCESSING", ha="center", va="center",
+            fontsize=6.4, weight="bold", color="#54834A")
 
     xs = [3.0, 27.0, 51.0, 75.0]
     w = 22.0
@@ -315,31 +300,26 @@ def draw_map_based_workflow(frames: dict[str, pd.DataFrame]) -> None:
     ax.add_patch(left_card); ax.add_patch(right_card)
     ax.text(25.5, 14.3, "SPATIAL HOLD-OUT EVALUATION", ha="center", va="center",
             fontsize=6.8, weight="bold", color="#9A6423")
-    ax.text(25.5, 8.9,
-            "5 grouped folds · 500 m blocks · 90 m buffer\nOut-of-fold RMSE, MAE, bias and depth-stratified errors\nBlock-bootstrap intervals and sensitivity analyses",
-            ha="center", va="center", fontsize=5.8, color=INK, linespacing=1.32)
-    ax.text(74.5, 14.3, "SUPPORTED FULL-DATA MAPS", ha="center", va="center",
-            fontsize=6.8, weight="bold", color=NAVY)
-    ax.text(74.5, 12.4, "Random Forest · within 90 m of survey support",
-            ha="center", va="center", fontsize=5.3, color=INK)
-    ax.imshow(prediction_sheet(), extent=(56.5, 91.5, 5.5, 11.7), origin="lower",
-              interpolation="nearest", aspect="auto", zorder=2)
-    ax.text(66.0, 4.8, "A  Anza / Agadir", ha="center", va="center",
-            fontsize=5.0, color=MUTED)
-    ax.text(82.0, 4.8, "B  Ras El Ma / Ras Kebdana", ha="center", va="center",
-            fontsize=5.0, color=MUTED)
-    arrow(ax, (33, 19.0), (25.5, 16.8), color=GOLD, lw=0.85)
-    arrow(ax, (49, 19.0), (74.5, 16.8), color=BLUE, lw=0.85)
-    ax.text(50, 1.4,
-            "Accuracy is reported from held-out folds; fitted maps visualise spatial patterns only.",
-            ha="center", va="center", fontsize=5.7, color=MUTED)
+    ax.text(25.5, 8.6,
+            "5 grouped folds · 500 m blocks · 90 m buffer\nOut-of-fold RMSE, MAE and bias\nDepth-stratified errors\nBlock-bootstrap intervals and sensitivity analyses",
+            ha="center", va="center", fontsize=5.55, color=INK, linespacing=1.22)
+    ax.text(74.5, 14.3, "SUPPORTED PREDICTION PRODUCTS", ha="center", va="center",
+            fontsize=6.4, weight="bold", color=NAVY)
+    ax.text(74.5, 8.6,
+            "Refit selected estimators on matched samples\nMap within 90 m of valid survey cells\nRetain each site's local port zero\nMaps shown separately in Figure 13",
+            ha="center", va="center", fontsize=5.55, color=INK, linespacing=1.22)
+    # Routed curves leave the estimator box and meet the top edge of each
+    # destination card. Their control points keep both trajectories above all
+    # card text and prevent the previous sweeping arrow from crossing labels.
+    trajectory(ax, [(34, 19.15), (32.0, 18.7), (25.5, 18.6), (25.5, 16.65)], color=GOLD)
+    trajectory(ax, [(48, 19.15), (53.0, 18.7), (74.5, 18.6), (74.5, 16.65)], color=BLUE)
     save(fig, "Figure3_MapBased_Methods_Workflow_TwoCoast")
 
 
 def write_captions_and_attribution() -> None:
     captions = """Figure 2. Overlay of HLS reflectance and measured bathymetric samples on the same 30 m grid. Panels A and B show Anza / Agadir and Ras El Ma / Ras Kebdana, respectively. The RGB map background displays the quality-weighted B04/B03/B02 surface-reflectance composite; depth-coloured points mark the measured median depth in each matching 30 m cell. RGB contrast is stretched independently for each site. Depth is positive downward from each site's local port hydrographic zero; no common vertical datum or interpolated seabed surface is implied. Axes show local UTM offsets.
 
-Figure 3. Source-to-output workflow for the two-coast satellite-derived bathymetry study, arranged as parallel data-source lanes. HLS S30/L30 reflectance, local XYZ soundings and GOT5.6/pyTMD tide anomalies pass through their respective screening and preparation steps before being overlaid on matched 30 m cells. Stumpf log-ratio, Random Forest, HistGradientBoosting and RBF-SVR are evaluated with five grouped spatial folds, 500 m blocks and a 90 m buffer. The lower-right maps are saved full-data Random Forest predictions within 90 m of survey support; performance claims use out-of-fold predictions. Each site's depths retain its local port zero. EMODnet and GEBCO are shown as source context only and do not enter model fitting or validation.
+Figure 3. Source-to-output workflow for the two-coast satellite-derived bathymetry study, arranged as parallel data-source lanes. HLS S30/L30 reflectance, local XYZ soundings and GOT5.6/pyTMD tide anomalies pass through their respective screening and preparation steps before being overlaid on matched 30 m cells. Stumpf log-ratio, Random Forest, HistGradientBoosting and RBF-SVR are evaluated with five grouped spatial folds, 500 m blocks and a 90 m buffer. The two final branches distinguish out-of-fold performance assessment from full-data prediction products, which are mapped only within 90 m of valid survey cells. Each site's depths retain its local port zero. EMODnet and GEBCO are shown as source context only and do not enter model fitting or validation.
 """
     (OUT / "Materials_Methods_Additional_Captions_EN.txt").write_text(captions, encoding="utf-8")
     credits = """Third-party logo source notes for the methods workflow figure
