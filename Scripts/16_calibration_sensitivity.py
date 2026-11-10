@@ -19,6 +19,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy.spatial import cKDTree
+from scipy.spatial.distance import cdist
 from sklearn.model_selection import GroupKFold
 from sklearn.preprocessing import StandardScaler
 
@@ -76,6 +77,30 @@ def effective_blocks(weights: np.ndarray, blocks: np.ndarray) -> float:
     if not len(mass) or np.sum(mass ** 2) == 0:
         return 0.0
     return float(mass.sum() ** 2 / np.sum(mass ** 2))
+
+
+def weighted_quantiles_rows(values: np.ndarray, weights: np.ndarray,
+                            level: float) -> np.ndarray:
+    """Compute one weighted empirical quantile per row without re-sorting scores."""
+    values = np.asarray(values, dtype=float)
+    weights = np.asarray(weights, dtype=float)
+    order = np.argsort(values)
+    sorted_values = values[order]
+    cumulative = np.cumsum(weights[:, order], axis=1)
+    thresholds = cumulative[:, -1:] * level
+    indexes = np.sum(cumulative < thresholds, axis=1)
+    return sorted_values[np.minimum(indexes, len(sorted_values) - 1)]
+
+
+def effective_blocks_rows(weights: np.ndarray, blocks: np.ndarray) -> np.ndarray:
+    """Effective calibration-block count for each row of pixel weights."""
+    blocks = np.asarray(blocks, dtype=object)
+    unique = np.unique(blocks)
+    mass = np.column_stack([weights[:, blocks == block].sum(axis=1) for block in unique])
+    total = mass.sum(axis=1)
+    normalized = np.divide(mass, total[:, None], out=np.zeros_like(mass), where=total[:, None] > 0)
+    return np.divide(1.0, np.sum(normalized ** 2, axis=1),
+                     out=np.zeros(len(weights), dtype=float), where=np.sum(normalized ** 2, axis=1) > 0)
 
 
 def block_bootstrap(values: np.ndarray, seed: int, draws: int = 3000) -> tuple[float, float, float]:
@@ -187,6 +212,10 @@ def main():
                     scaler = StandardScaler().fit(raw_x[fit_ix])
                     cal_z = scaler.transform(raw_x[cal_ix])
                     test_z = scaler.transform(raw_x[test_ix])
+                    # Distances are identical across confidence levels and bandwidth
+                    # settings, so compute them once per repeated split.
+                    d_space_sq = cdist(mxy[test_ix], mxy[cal_ix], metric="sqeuclidean")
+                    d_feature_sq = cdist(test_z, cal_z, metric="sqeuclidean") / raw_x.shape[1]
 
                     # Radii for global and depth-conditional baselines.
                     q_global = {}
@@ -220,38 +249,38 @@ def main():
                         )
 
                         for spatial_bw, feature_bw in BANDWIDTHS:
-                            local_r = np.empty(len(test_ix), dtype=float)
-                            local_fb = np.zeros(len(test_ix), dtype=bool)
-                            local_neff = np.empty(len(test_ix), dtype=float)
+                            log_w = -0.5 * (d_space_sq / spatial_bw ** 2 +
+                                            d_feature_sq / feature_bw ** 2)
+                            log_w -= np.max(log_w, axis=1, keepdims=True)
+                            weights = np.exp(log_w) * global_w[None, :]
+                            local_neff = effective_blocks_rows(weights, cal_blocks)
+                            local_fb = local_neff < MIN_EFFECTIVE_BLOCKS
+                            local_quantile = weighted_quantiles_rows(cal_error, weights, level)
+                            local_r = np.where(local_fb, q_global[level], local_quantile)
+
                             depth_local_r = np.empty(len(test_ix), dtype=float)
                             depth_local_fb = np.zeros(len(test_ix), dtype=bool)
                             depth_local_neff = np.zeros(len(test_ix), dtype=float)
-                            for j, sample in enumerate(test_ix):
-                                d_space = np.sqrt(np.sum((mxy[cal_ix] - mxy[sample]) ** 2, axis=1))
-                                d_feat = np.sqrt(np.mean((cal_z - test_z[j]) ** 2, axis=1))
-                                log_w = -0.5 * ((d_space / spatial_bw) ** 2 + (d_feat / feature_bw) ** 2)
-                                log_w -= np.max(log_w)
-                                weights = np.exp(log_w) * global_w
-                                neff = effective_blocks(weights, cal_blocks)
-                                local_neff[j] = neff
-                                local_fb[j] = neff < MIN_EFFECTIVE_BLOCKS
-                                local_r[j] = (q_global[level] if local_fb[j]
-                                              else weighted_quantile(cal_error, weights, level))
-
-                                band_mask = cal_band == test_band[j]
-                                block_n = len(np.unique(cal_blocks[band_mask]))
-                                qd = q_depth[(level, test_band[j])]
-                                if block_n < 3:
-                                    depth_local_fb[j] = True
-                                    depth_local_r[j] = qd
+                            for band in ("<=5 m", ">5–10 m", ">10 m"):
+                                test_mask = test_band == band
+                                if not test_mask.any():
                                     continue
-                                w_band = balanced_weights(cal_blocks[band_mask])
-                                lw_band = np.exp(log_w[band_mask] - np.max(log_w[band_mask])) * w_band
-                                neff_band = effective_blocks(lw_band, cal_blocks[band_mask])
-                                depth_local_neff[j] = neff_band
-                                depth_local_fb[j] = neff_band < MIN_EFFECTIVE_BLOCKS
-                                depth_local_r[j] = (qd if depth_local_fb[j]
-                                                    else weighted_quantile(cal_error[band_mask], lw_band, level))
+                                cal_mask = cal_band == band
+                                qd = q_depth[(level, band)]
+                                if depth_support[(level, band)] < 3:
+                                    depth_local_r[test_mask] = qd
+                                    depth_local_fb[test_mask] = True
+                                    continue
+                                depth_w = balanced_weights(cal_blocks[cal_mask])
+                                log_band = log_w[test_mask][:, cal_mask]
+                                log_band -= np.max(log_band, axis=1, keepdims=True)
+                                band_weights = np.exp(log_band) * depth_w[None, :]
+                                band_neff = effective_blocks_rows(band_weights, cal_blocks[cal_mask])
+                                band_fb = band_neff < MIN_EFFECTIVE_BLOCKS
+                                band_q = weighted_quantiles_rows(cal_error[cal_mask], band_weights, level)
+                                depth_local_r[test_mask] = np.where(band_fb, qd, band_q)
+                                depth_local_fb[test_mask] = band_fb
+                                depth_local_neff[test_mask] = band_neff
                             metrics_by_setting[("Local geography + spectrum", spatial_bw, feature_bw)] = (
                                 local_r, local_fb, local_neff)
                             metrics_by_setting[("Local geography + spectrum within depth band", spatial_bw, feature_bw)] = (
