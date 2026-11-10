@@ -250,7 +250,11 @@ def write_figure5(metrics,summary):
 
 
 def write_figure6(summary,oof,metadata):
-    fig,axes=plt.subplots(2,2,figsize=(12,8),layout='constrained')
+    from matplotlib.lines import Line2D
+    fig=plt.figure(figsize=(12,8.35),layout='constrained')
+    gs=fig.add_gridspec(3,2,height_ratios=[1,1,0.12])
+    axes=np.array([[fig.add_subplot(gs[row,col]) for col in range(2)] for row in range(2)])
+    legend_ax=fig.add_subplot(gs[2,:]); legend_ax.set_axis_off()
     for col,(site_key,site) in enumerate(CFG['sites'].items()):
         model=diagnostic_model()
         d=oof[(oof.site==site_key)&(oof.model==model)].drop_duplicates('sample_index')
@@ -260,7 +264,7 @@ def write_figure6(summary,oof,metadata):
         ax.plot([0,vmax],[0,vmax],color=CORAL,ls='--',lw=1.2,label='1:1')
         ax.set_xlim(0,vmax); ax.set_ylim(0,vmax); ax.set_aspect('equal',adjustable='box')
         ax.set_xlabel('Survey depth below local zero (m)'); ax.set_ylabel('Out-of-fold predicted depth (m)')
-        add_panel_label(ax,'A' if col==0 else 'B'); ax.legend(frameon=False)
+        add_panel_label(ax,'A' if col==0 else 'B')
         fig.colorbar(hb,ax=ax,fraction=0.046,pad=0.02,label='Pixel count (log scale)')
         ax2=axes[1,col]
         ax2.scatter(d.observed_depth_m,d.residual_m,c=d.residual_m,cmap='RdBu_r',vmin=-2,vmax=2,s=10,alpha=0.55,edgecolors='none')
@@ -271,7 +275,10 @@ def write_figure6(summary,oof,metadata):
         ax2.plot(centers,trend,color=GOLD,lw=2.1,marker='o',ms=3.5,label='Median by depth bin')
         ax2.set_xlabel('Survey depth below local zero (m)'); ax2.set_ylabel('Prediction − survey (m)')
         add_panel_label(ax2,'C' if col==0 else 'D')
-        ax2.grid(color='#E4EBEF',lw=0.65); ax2.legend(frameon=False,fontsize=7)
+        ax2.grid(color='#E4EBEF',lw=0.65)
+    shared_handles=[Line2D([0],[0],color=CORAL,ls='--',lw=1.2,label='1:1'),
+                    Line2D([0],[0],color=GOLD,lw=2.1,marker='o',ms=3.5,label='Median by depth bin')]
+    legend_ax.legend(handles=shared_handles,loc='center',ncol=2,frameon=False,fontsize=7.5)
     save(fig,'Figure6_heldout_accuracy_and_residuals')
 
 
@@ -361,7 +368,10 @@ def write_figure9_open_grid_context():
     samples=pd.read_csv(sample_path,usecols=['site','x_m','y_m'])
     projectors={key:Transformer.from_crs(site['image_crs'],'EPSG:4326',always_xy=True)
                 for key,site in CFG['sites'].items()}
-    fig,axes=plt.subplots(2,4,figsize=(15,7.7),layout='constrained')
+    fig=plt.figure(figsize=(15,8.3),layout='constrained')
+    gs=fig.add_gridspec(3,4,height_ratios=[1,1,0.22])
+    axes=np.array([[fig.add_subplot(gs[row,col]) for col in range(4)] for row in range(2)])
+    legend_ax=fig.add_subplot(gs[2,:]); legend_ax.set_axis_off()
     grid_cmap='RdBu_r'
     tid_codes=[0,16,40,44]
     tid_names={0:'Land',16:'Optical',40:'Altimetry prediction',44:'Sounding-constrained grid'}
@@ -406,17 +416,15 @@ def write_figure9_open_grid_context():
             ax.tick_params(labelsize=7)
             add_panel_label(ax,chr(ord('A')+panel)); panel+=1
             ax.grid(color='white',lw=0.5,alpha=0.4)
-            if col==0: ax.legend(handles=[Line2D([0],[0],marker='o',linestyle='none',markersize=3,
-                                                  markerfacecolor='#17212B',markeredgewidth=0,
-                                                  label='Survey sample pixels')],
-                                 loc='lower left',frameon=True,facecolor='white',framealpha=0.85,fontsize=7)
         fig.colorbar(plt.cm.ScalarMappable(norm=norm,cmap=grid_cmap),ax=axes[row,:3],shrink=0.75,pad=0.015,
                      label='Source-grid value (m; native sign)')
 
     tid_legend=[LegendPatch(facecolor=color,edgecolor='white',label=f'{code} · {tid_names[code]}')
                 for code,color in zip(tid_codes,tid_colors)]
-    fig.legend(handles=tid_legend,loc='lower center',bbox_to_anchor=(0.79,-0.01),ncol=1,
-               frameon=False,fontsize=7,title='GEBCO TID class')
+    survey_handle=Line2D([0],[0],marker='o',linestyle='none',markersize=3,
+                         markerfacecolor='#17212B',markeredgewidth=0,label='Survey sample pixels')
+    legend_ax.legend(handles=[survey_handle,*tid_legend],loc='center',ncol=3,frameon=False,
+                     fontsize=7,title='Survey overlay and GEBCO TID classes',title_fontsize=7.5)
     save(fig,'Figure9_open_bathymetry_and_source_context')
 
 

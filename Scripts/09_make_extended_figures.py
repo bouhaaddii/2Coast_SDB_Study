@@ -174,15 +174,22 @@ def plot_depth_strata():
         for case,color in colors.items():
             z=sub[sub.tide_case==case].set_index('depth_bin_m').reindex(order)
             ax.plot(np.arange(len(order)),z.rmse_m,color=color,marker='o',ms=4,lw=1.7,label=labels[case])
-            for i,n in enumerate(z.n_test_pixels.fillna(0)):
-                if n: ax.annotate(f'n={int(n):,}',(i,z.rmse_m.iloc[i]),xytext=(0,6),textcoords='offset points',
-                                  ha='center',fontsize=6.2,color=color)
+        ax.margins(y=.14)
+        for i,depth_bin in enumerate(order):
+            bin_rows=sub[sub.depth_bin_m==depth_bin]
+            if bin_rows.empty: continue
+            n=bin_rows.n_test_pixels.iloc[0]
+            values=bin_rows.rmse_m.dropna()
+            if n and len(values):
+                ax.annotate(f'n={int(n):,}',(i,float(values.max())),xytext=(0,5),textcoords='offset points',
+                            ha='center',va='bottom',fontsize=6.2,color=INK)
         ax.set_xticks(np.arange(len(order)),order)
         ax.set_xlabel('Observed sounding depth stratum')
         ax.set_ylabel('Out-of-fold RMSE (m)')
         ax.grid(axis='y',color=PALE,lw=.65)
-        panel(ax,'A' if site_key==next(iter(CFG['sites'])) else 'B')
-        ax.text(.98,.04,site['display_name'],transform=ax.transAxes,ha='right',va='bottom',fontsize=8,color=INK)
+        panel_letter='A' if site_key==next(iter(CFG['sites'])) else 'B'
+        site_name=site['display_name'].split(',')[0]
+        ax.set_title(f'{panel_letter}  {site_name}',loc='left',fontsize=8.5,fontweight='bold',color=INK,pad=5)
     handles,labels0=axes[0].get_legend_handles_labels()
     fig.legend(handles,labels0,loc='lower center',bbox_to_anchor=(.5,-.04),ncol=2,frameon=False,fontsize=7.5)
     save(fig,'Figure15_depth_stratified_validation')
