@@ -138,7 +138,7 @@ def write_figure2():
         ax.set_yticks([0,1],['HLS L30 · Landsat','HLS S30 · Sentinel-2'])
         ax.set_ylim(-0.65,1.65); ax.grid(axis='x',color='#DCE5EA',lw=0.65)
         ax.set_ylabel('Input sensor')
-        ax.legend(frameon=False,ncol=3,loc='upper left',fontsize=8)
+        ax.legend(frameon=False,ncol=3,loc='upper right',fontsize=8)
         ax.xaxis.set_major_formatter(mdates.DateFormatter('%d %b'))
     axes[-1].set_xlabel('Acquisition date (UTC)')
     sm=plt.cm.ScalarMappable(cmap='viridis',norm=plt.Normalize(0,1)); sm.set_array([])
